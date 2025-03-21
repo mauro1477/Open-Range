@@ -1,0 +1,7 @@
+name: openrange
+recipe: wordpress
+config:
+  webroot: .
+services:
+  appserver:
+    type: php:8.2 #add these lines
