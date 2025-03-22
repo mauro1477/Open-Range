@@ -2,9 +2,10 @@
 <nav>
     <ul class="nav-main">
         {% for item in menu.items %}
-            <li class="nav-main-item {{ item.classes|join(' ') }} dropdown">
+            <li class="nav-main-item {{ item.classes|join(' ') }}">
                 <a  class="nav-main-link" href="{{ item.link }}" {{ item.is_target_blank ? 'target="_blank"' }}>{{ item.title }}</a>
                 {% if item.children %}
+					<i class="fa fa-caret-down"></i>
                     <ul class="nav-drop">
                         {% for child in item.children %}
                             <li class="nav-drop-item">

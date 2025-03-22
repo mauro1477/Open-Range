@@ -16,9 +16,16 @@ class StarterSite extends Site {
 		add_filter('post_type_link', [$this , 'filter_post_type_guide_link'], 10, 2);
 		add_action( 'save_post', [$this, 'default_taxonomy_term'], 100, 2 );
 		add_action('after_setup_theme', [$this, 'register_menu']);
+		add_action( 'after_setup_theme', array( $this, 'enqueue_styles_and_scripts' ) );
 
 		parent::__construct();
 	}
+
+	function enqueue_styles_and_scripts(){
+		$theme_root = get_theme_root_uri();
+		wp_enqueue_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/bundle.js', array('jquery','wp-api'),'', true );
+		wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/main.css');
+ 	}
 
 
 	/**
