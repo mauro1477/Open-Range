@@ -22,10 +22,44 @@ class StarterSite extends Site {
 	}
 
 	function enqueue_styles_and_scripts(){
+
+
 		$theme_root = get_theme_root_uri();
-		wp_enqueue_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/bundle.js', array('jquery','wp-api'),'', true );
-		wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/main.css');
- 	}
+		// Register the script
+		wp_register_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/index.bundle.js' );
+
+		// Localize the script with new data
+		$array_menu = wp_get_nav_menu_items('primary-menu');
+		$menu = array();
+		foreach ($array_menu as $m) {
+			if (empty($m->menu_item_parent)) {
+				$menu[$m->ID]['ID'] 		= 	$m->ID;
+				$menu[$m->ID]['title'] 		= 	$m->title;
+				$menu[$m->ID]['url'] 		= 	$m->url;
+				$menu[$m->ID]['children']	= 	array();
+			}
+		}
+		$submenu = array();
+		foreach ($array_menu as $m) {
+			if ($m->menu_item_parent) {
+				$submenu = array();
+				$submenu[$m->ID]['ID'] 		= 	$m->ID;
+				$submenu[$m->ID]['title']	= 	$m->title;
+				$submenu[$m->ID]['url'] 	= 	$m->url;
+				$menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+			}
+		} 
+		$host_name =  $_SERVER["HTTP_X_FORWARDED_PROTO"] ."://" .$_SERVER["HTTP_HOST"];
+		$theme_vars = array(
+			'menu' => $menu,
+			'host_name' => $host_name
+
+		);
+		wp_localize_script( 'base-scripts', 'theme_vars', $theme_vars);
+		wp_enqueue_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/index.bundle.js', array('jquery','wp-api'),'', true );
+		wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/index.bundle.css',);
+ 	}		
+
 
 
 	/**
@@ -232,7 +266,7 @@ class StarterSite extends Site {
 			'secondary' => 'Secondary Menu',
 			'footer' => 'Footer Menu',
 		]);
-}
+	}
 
 
 
