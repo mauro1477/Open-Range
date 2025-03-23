@@ -3,7 +3,7 @@
     <header :class="{'scrolled-nav': scrollPosition }">
         <nav>
             <div class="branding">
-                <img :src="logo"  alt="">
+                <i class="fa-solid fa-tree" style="color: #57ae37;"></i>
                 <div class="website-title-logo">Open Range</div>
             </div>
             <ul v-show="!mobile" class="navigation">
@@ -31,7 +31,6 @@
 export default {
     data() {
         return {
-            logo: theme_vars['host_name'] += "/wp-content/themes/timber-starter-theme/dist/images/logo.png",
             local_data_primary_menu: theme_vars['menu'],
             scrollPostion: null,
             mobile: true,
@@ -118,9 +117,10 @@ header{
     .branding{
         display: flex;
         align-items: center;
-
+        i,
         img{
-            width: 50px;
+            font-size: 20px;
+            margin-right: 15px;
             transition: 0.5s ease all;
         }
     }
