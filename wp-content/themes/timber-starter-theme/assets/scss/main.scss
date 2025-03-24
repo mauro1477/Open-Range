@@ -13,3 +13,11 @@
 body{
     margin: 0;
 }
+
+.content-wrapper{
+    display: flex;
+    max-width: 1140px;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 15px;
+}

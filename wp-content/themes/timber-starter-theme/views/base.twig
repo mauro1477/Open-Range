@@ -8,7 +8,34 @@
 
 	<body class="{{body_class}}" data-template="base.twig">
 		{{ function('wp_body_open') }}
-	 	<div id="app"></div>
-		{{ function('wp_footer') }}
+		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
+		<header class="header" >
+			{% block header %}
+				<div class="wrapper">
+					<!-- Navigation vue component -->
+					<nav id="nav-main" class="nav-main" role="navigation"></nav>
+				</div>
+			{% endblock %}
+		</header>
+
+		<section id="content" role="main" class="content-wrapper">
+			{% if title %}<h1>{{title}}</h1>{% endif %}
+			<div class="wrapper">
+				{% block content %}
+					Sorry, no content
+				{% endblock %}
+			</div>
+			{% if sidebar %}
+				<aside class="layout-sidebar">
+					{{sidebar}}
+				</aside>
+			{% endif %}
+		</section>
+
+		{% block footer %}
+			<!-- Footer vue component -->
+			<footer id="footer" class="footer"></footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
 	</body>
 </html>
