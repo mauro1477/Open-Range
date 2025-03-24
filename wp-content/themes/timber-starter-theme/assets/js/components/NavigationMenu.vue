@@ -45,6 +45,9 @@ export default {
     mounted() {
         document.addEventListener('click', this.handleClickOutsideDropdownMenu);
     },
+    beforeUnmount() {
+        document.removeEventListener('click', this.handleClickOutsideDropdownMenu);
+    },
     methods: {
         toggleMobileNav(){
             this.mobileNav = !this.mobileNav;
