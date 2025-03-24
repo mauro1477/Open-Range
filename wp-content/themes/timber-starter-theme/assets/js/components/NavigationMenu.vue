@@ -1,6 +1,6 @@
 <template>
 <div if="true">
-    <header :class="{'scrolled-nav': scrollPosition }">
+    <header>
         <nav>
             <a href="/" target="" class="branding">
                 <i class="fa-solid fa-tree" style="color: #57ae37;"></i>
@@ -12,11 +12,11 @@
                 </li>
             </ul>
             <div class="icon">
-                <i @click="toggleMobileNav"  v-show="mobile" :class="{'icon-active' : mobileNav }"  class="fa-solid fa-bars"></i>
+                <i id="toggle-icon" @click="toggleMobileNav"  v-show="mobile" :class="{'icon-active' : mobileNav }"  class="fa-solid fa-bars"></i>
             </div>
-            <Transition name="mobile-nav">
+            <Transition id="mobile-nav" name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
-                    <li v-for="(item, index) in local_data_primary_menu">
+                    <li class="link-wrapper" v-for="(item, index) in local_data_primary_menu">
                         <a class="link" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
                     </li>
                 </ul>
@@ -29,10 +29,10 @@
 <script>
 
 export default {
+
     data() {
         return {
             local_data_primary_menu: theme_vars['menu'],
-            scrollPostion: null,
             mobile: true,
             mobileNav: null,
             windowWidth: null
@@ -42,9 +42,11 @@ export default {
         window.addEventListener('resize', this.checkScreen);
         this.checkScreen();
     },
+    mounted() {
+        document.addEventListener('click', this.handleClickOutsideDropdownMenu);
+    },
     methods: {
         toggleMobileNav(){
-            console.log('toggleMobileNav');
             this.mobileNav = !this.mobileNav;
         },
         checkScreen(){
@@ -57,6 +59,11 @@ export default {
             this.mobile = false;
             this.mobileNav = false;
             return;
+        },
+        handleClickOutsideDropdownMenu(event){
+            if (event.target.id !== "mobile-nav" && event.target.id !== "toggle-icon" && event.target.className !== "link" && event.target.className !== "link-wrapper"  ) {
+                this.mobileNav = false;
+            } 
         }
     },
 }
