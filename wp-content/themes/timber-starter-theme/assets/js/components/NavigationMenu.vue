@@ -2,10 +2,10 @@
 <div if="true">
     <header :class="{'scrolled-nav': scrollPosition }">
         <nav>
-            <div class="branding">
+            <a href="/" target="" class="branding">
                 <i class="fa-solid fa-tree" style="color: #57ae37;"></i>
                 <div class="website-title-logo">Open Range</div>
-            </div>
+            </a>
             <ul v-show="!mobile" class="navigation">
                 <li v-for="(item, index) in local_data_primary_menu">
                     <a class="link" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
@@ -115,6 +115,8 @@ header{
     }
 
     .branding{
+        text-decoration: none;
+        cursor: pointer;
         display: flex;
         align-items: center;
         i,
