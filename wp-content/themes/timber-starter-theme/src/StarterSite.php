@@ -17,8 +17,88 @@ class StarterSite extends Site {
 		add_action( 'save_post', [$this, 'default_taxonomy_term'], 100, 2 );
 		add_action('after_setup_theme', [$this, 'register_menu']);
 		add_action( 'after_setup_theme', array( $this, 'enqueue_styles_and_scripts' ) );
+		// add_action('init', array($this, 'convert_posts_to_algolia_object'));
+		add_filter('acf/fields/google_map/api', array($this, 'open_range_map_key'));
+		add_action('rest_api_init', array($this, 'register_rest_api_guides'));
 
 		parent::__construct();
+	}
+
+	public function open_range_map_key($api){
+		$api['key'] = Google_api_key;
+		return $api;
+	}
+
+	public function register_rest_api_guides(){
+		register_rest_route( 'timber-starter-theme/v2', '/get-algolia-object-guides', array(
+			'methods' => 'GET',
+			'callback' => array($this, 'get_algolia_object_guides'),
+		  ) );
+	}
+
+	public function get_guides_from_id(){
+		return ['hello world'];
+	} 
+
+	function convert_posts_to_algolia_object(){
+		$id = $request['id']; 
+		// Custom WP query query
+		$args_query = array(
+			'post_type' => array('guides'),
+			'order' => 'DESC',
+		);
+	
+		$query = new WP_Query( $args_query );
+	
+		if ( $query->have_posts() ) { 
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				var_dump($query->the_post());
+				$data = [];
+			}
+		} else {
+			echo "no guides posts";
+		}
+		return $data;
+	}
+
+	/**
+	 * Add REST API support to an already registered post type.
+	 */
+	
+	function my_post_type_args_guides( $args, $post_type ) {
+	
+		if ( 'guides' === $post_type ) {
+			$args['show_in_rest'] = true;
+	
+			// Optionally customize the rest_base or rest_controller_class
+			$args['rest_base']             = 'guides';
+			$args['rest_controller_class'] = 'WP_REST_Posts_Controller';
+		}
+	
+		return $args;
+	}
+	
+	function get_events_from_id($request){
+		$id = $request['id']; 
+		// Custom WP query query
+		$args_query = array(
+			'post_type' => array('guides'),
+			'order' => 'DESC',
+		);
+	
+		$query = new WP_Query( $args_query );
+	
+		if ( $query->have_posts() ) { 
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$data = [];
+			}
+		} else {
+			echo "no guides posts";
+		}
+		return $data;
+		wp_reset_postdata();
 	}
 
 	function enqueue_styles_and_scripts(){
@@ -68,7 +148,7 @@ class StarterSite extends Site {
 	public function register_post_types() {
 		$labels = array(
 			'name' => _x( 'guides', 'my_custom_post','custom' ),
-			'singular_name' => _x( 'Theme', 'my_custom_post', 'custom' ),
+			'singular_name' => _x( 'Guide', 'my_custom_post', 'custom' ),
 			'add_new' => _x( 'Add New', 'my_custom_post', 'custom' ),
 			'add_new_item' => _x( 'Add New GuidePost', 'my_custom_post', 'custom' ),
 			'edit_item' => _x( 'Edit GuidePost', 'my_custom_post', 'custom' ),
@@ -83,6 +163,7 @@ class StarterSite extends Site {
 	
 		$args = array(
 			'labels' => $labels,
+			'show_in_rest' => true,
 			'hierarchical' => false,
 			'description' => 'Custom Theme Posts',
 			'supports' => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'post-formats', 'custom-fields' ),
