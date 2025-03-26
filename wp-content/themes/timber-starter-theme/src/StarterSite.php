@@ -8,7 +8,7 @@ use Timber\Site;
 class StarterSite extends Site {
 	public function __construct() {
 		add_action( 'after_setup_theme', array( $this, 'theme_supports' ) );
-		add_action( 'init', array( $this, 'register_post_types' ) );
+		add_action( 'init', array( $this, 'register_post_types' ) ,1);
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		add_filter( 'timber/context', array( $this, 'add_to_context' ) );
 		add_filter( 'timber/twig', array( $this, 'add_to_twig' ) );
@@ -19,7 +19,7 @@ class StarterSite extends Site {
 		add_action( 'after_setup_theme', array( $this, 'enqueue_styles_and_scripts' ) );
 		// add_action('init', array($this, 'convert_posts_to_algolia_object'));
 		add_filter('acf/fields/google_map/api', array($this, 'open_range_map_key'));
-		add_action('rest_api_init', array($this, 'register_rest_api_guides'));
+		// add_action('rest_api_init', array($this, 'register_rest_api_guides'));
 
 		parent::__construct();
 	}
@@ -164,8 +164,8 @@ class StarterSite extends Site {
 		$args = array(
 			'labels' => $labels,
 			'show_in_rest' => true,
-			'hierarchical' => false,
-			'description' => 'Custom Theme Posts',
+			'hierarchical' => true,
+			'description' => 'Custom Guide Posts',
 			'supports' => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'post-formats', 'custom-fields' ),
 			'taxonomies' => array( 'post_tag','guides_categories'),
 			'show_ui' => true,
@@ -193,6 +193,7 @@ class StarterSite extends Site {
 			'guides_categories',  // The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces).
 			'guides',             // post type name
 			array(
+				'show_in_rest'      => true,
 				'hierarchical' => true,
 				'label' => 'Guide Categories', // display name
 				'query_var' => true,
