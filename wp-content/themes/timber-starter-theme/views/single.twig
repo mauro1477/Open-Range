@@ -5,13 +5,37 @@
 		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
 			<img src="{{ post.thumbnail.src|resize(1200, 300) }}">
 			<section class="article-content">
-				<h1 class="article-h1">{{ post.title }}</h1>
-				<a href="{{ post.link }}">{{ _e('edit') }}</a>
-				<p class="blog-author">
-					<span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> <time datetime="{{ post.date|date('Y-m-d H:i:s') }}">{{ post.date }}</time>
-				</p>
+				<h1 class="article-h1">Guide: {{ post.title }}</h1>
 				<div class="article-body">
-					{{post.content}}
+					{{ post.content }}
+					{% if post.meta('guides_location')["address"] %}
+						<p>Address: {{ post.meta('guides_location')["address"]  }}</p>
+					{% endif %}
+
+					{% if post.meta('registration') %}
+						<p>Registration:  {{ post.meta('registration') }}</p>
+					{% endif %}	
+					
+					{% if post.meta('phone') %}
+						<p>Phone: {{ post.meta('phone') }}</p>
+					{% endif %}
+
+
+					{% if post.meta('hunt_units') %}
+						<p>Hunt Units: {{ post.meta('hunt_units') }}</p>
+					{% else %}
+						<p>No Hunt Units Listed</p>
+					{% endif %}
+
+					{% if post.meta('website')%}
+						<a href="{{ post.meta('website')}} " target="_blank" rel="noopener noreferrer">{{post.meta('website')}}</a>
+					{% endif %}
+
+					{% if post.meta('openedrange_verified') == true %}
+						<p>OpenedRange Verified: Yes</p>
+					{% else %}
+						<p>OpenedRange Verified: No</p>
+					{% endif %}
 				</div>
 			</section>
 
