@@ -135,6 +135,8 @@ class StarterSite extends Site {
 			'host_name' => $host_name
 
 		);
+		$google_api = "//maps.googleapis.com/maps/api/js?key=" . Google_api_key ."&loading=async&callback=initMap";
+		wp_enqueue_script( 'googleMaps', $google_api, array(),'1.0', true );
 		wp_localize_script( 'base-scripts', 'theme_vars', $theme_vars);
 		wp_enqueue_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/index.bundle.js', array('jquery','wp-api'),'', true );
 		wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/index.bundle.css',);

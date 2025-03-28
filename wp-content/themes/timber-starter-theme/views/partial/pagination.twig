@@ -3,7 +3,7 @@
         <ul class="pagination">
 
             {# First #}
-            {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
+            {# {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
                 <li class="first btn">
                     <a href="{{ posts.pagination.pages|first.link }}">First</a>
                 </li>
@@ -11,7 +11,7 @@
                 <li class="first btn disabled">
                     <button disabled>First</button>
                 </li>
-            {% endif %}
+            {% endif %} #}
 
             {# Previous #}
             {% if posts.pagination.prev %}
@@ -49,7 +49,7 @@
             {% endif %}
 
             {# Last #}
-            {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
+            {# {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
                 <li class="last btn">
                     <a href="{{ posts.pagination.pages|last.link }}">Last</a>
                 </li>
@@ -57,7 +57,7 @@
                 <li class="last btn disabled">
                     <button disabled>Last</button>
                 </li>
-            {% endif %}
+            {% endif %} #}
 
         </ul>
     </nav>
