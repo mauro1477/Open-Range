@@ -61,6 +61,8 @@ body{
 .pagination {
     padding-bottom: 40px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding-left: 0;
     /* to remove bullets from an unordered list */
     ul {
