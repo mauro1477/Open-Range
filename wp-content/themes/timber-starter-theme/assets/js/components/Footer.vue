@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <p> Copyright © 2025 Open Range. All Rights Reserved.</p>
+        <p> Copyright © 2025 Opened Range. All Rights Reserved.</p>
     </div>
 </template>
 

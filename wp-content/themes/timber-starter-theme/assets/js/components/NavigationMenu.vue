@@ -4,7 +4,7 @@
         <nav>
             <a href="/" target="" class="branding">
                 <i class="fa-solid fa-tree" style="color: #57ae37;"></i>
-                <div class="website-title-logo">Open Range</div>
+                <div class="website-title-logo">Opened Range</div>
             </a>
             <ul v-show="!mobile" class="navigation">
                 <li v-for="(item, index) in local_data_primary_menu">
