@@ -38,43 +38,7 @@
 					{% endif %}
 
 				    {% if post.meta('guides_location')["address"] %}
-						<div id="map"></div>
-						<script>
-							let _lat = {{post.meta('guides_location')['lat']}};
-							var _lng = {{post.meta('guides_location')['lng']}};
-
-							let map;
-
-							function initMap() {
-							const mapOptions = {
-								zoom: 8,
-								center: { lat: _lat, lng: _lng },
-							};
-
-							map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-							const marker = new google.maps.Marker({
-								// The below line is equivalent to writing:
-								// position: new google.maps.LatLng(-34.397, 150.644)
-								position: { lat: _lat, lng: _lng },
-								map: map,
-							});
-							// You can use a LatLng literal in place of a google.maps.LatLng object when
-							// creating the Marker object. Once the Marker object is instantiated, its
-							// position will be available as a google.maps.LatLng object. In this case,
-							// we retrieve the marker's position using the
-							// google.maps.LatLng.getPosition() method.
-							const infowindow = new google.maps.InfoWindow({
-								content: "<p>Marker Location:" + marker.getPosition() + "</p>",
-							});
-
-							google.maps.event.addListener(marker, "click", () => {
-								infowindow.open(map, marker);
-							});
-							}
-
-							window.initMap = initMap;
-						</script>
+						<div id="google-map-iframe" data-guides-location="{{ guides_location |json_encode|e('html_attr') }}" ></div>
 					{% endif %}
 				</div>
 			</section>

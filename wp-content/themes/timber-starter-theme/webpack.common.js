@@ -2,7 +2,8 @@ const { VueLoaderPlugin } = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const Webpack  = require('webpack');
-const path  = require('path');
+const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -84,6 +85,9 @@ module.exports = {
     new Webpack.DefinePlugin({
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false,
+    }),
+    new Dotenv({
+      path: path.resolve(__dirname, `.env.${process.env.NODE_ENV || 'development'}`),
     })
   ],
   resolve: {
