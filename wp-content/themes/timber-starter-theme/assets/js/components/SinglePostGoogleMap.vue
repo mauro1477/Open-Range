@@ -65,7 +65,7 @@
 			this.infoWindowOpened = false;
 		},
 		getGoogleMapsDirectionsLinke(){
-			return `https://www.google.com/maps/dir/?api=1&destination= ${this.center.lat}, ${this.center.lng}`;
+			return `https://www.google.com/maps/dir/?api=1&destination=${this.address}`;
 		}
   	  },
     };
