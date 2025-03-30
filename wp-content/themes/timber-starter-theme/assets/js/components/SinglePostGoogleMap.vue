@@ -1,22 +1,32 @@
 <template>
-     <GoogleMap 
-        :api-key="YOUR_GOOGLE_MAPS_API_KEY" 
-        style="width: 100%; height: 500px" 
-        :center="center" 
-        :zoom="15"
-      >
-        <Marker :options="{ position: center }" />
-      </GoogleMap>
+    <GoogleMap 
+			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
+			style="width: 100%; height: 500px" 
+			:center="center" 
+			:zoom="15"
+    >
+		<Marker :options="{ position: center }">
+      <InfoWindow>
+        <div id="content">
+          <div id="siteNotice"></div>
+          <h1 id="firstHeading" class="firstHeading">{{title}}</h1>
+					<p>{{address}}</p>
+        </div>
+      </InfoWindow>
+    </Marker>
+	
+	</GoogleMap>
 </template>
 
 <script>
-    import { GoogleMap, Marker } from "vue3-google-map";
+    import { GoogleMap, Marker, InfoWindow } from "vue3-google-map";
 
     export default {
         name: "GoogleMapComponent",
         components: {
-        GoogleMap,
-        Marker
+		GoogleMap,
+        Marker,
+		InfoWindow
       },
       data() {
         return {
@@ -25,6 +35,15 @@
                 lat: null, 
                 lng: null
             },
+			title: null,
+			address: null,
+			mapZoom: 10,
+			infoWindowPosition: { 
+                lat: null, 
+                lng: null
+            },
+			infoWindowOpened: false,
+			selectedMarker: null,
         };
       },
       mounted() {
@@ -32,7 +51,20 @@
         const javascriptObject = JSON.parse(myArray);
         this.center.lat = javascriptObject['lat'];
         this.center.lng = javascriptObject['lng'];
-      }
+		this.address = javascriptObject['address'];
+		this.title = javascriptObject['title'].replace("&#8211;", "-")
+		console.log(javascriptObject);
+		this.infoWindowPosition.lat = javascriptObject['lat'];
+        this.infoWindowPosition.lng = javascriptObject['lng'];
+      },
+	  methods: {
+		openInfoWindow() {
+			this.infoWindowOpened = true;
+		},
+		closeInfoWindow() {
+			this.infoWindowOpened = false;
+		},
+  	  },
     };
 </script>
 

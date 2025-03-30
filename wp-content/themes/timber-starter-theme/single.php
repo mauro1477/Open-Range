@@ -13,6 +13,7 @@ $context         = Timber::context();
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
 $context['guides_location'] = get_field('guides_location',$context['post']->ID);
+$context['guides_location']['title'] = $context['post']->title;
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {
