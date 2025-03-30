@@ -9,7 +9,9 @@
 				<div class="article-body">
 					{{ post.content }}
 					{% if post.meta('guides_location')["address"] %}
-						<p>Address: {{ post.meta('guides_location')["address"]  }}</p>
+						<a href="{{ googleDirectionLink  }} " target="_blank" rel="noopener noreferrer">
+							Address:  {{ post.meta('guides_location')["address"] }}
+						</a>
 					{% endif %}
 
 					{% if post.meta('registration') %}

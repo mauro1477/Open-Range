@@ -14,6 +14,8 @@ $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
 $context['guides_location'] = get_field('guides_location',$context['post']->ID);
 $context['guides_location']['title'] = $context['post']->title;
+$context['googleDirectionLink'] = "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($context['guides_location']['address']);
+var_dump($context['googleDirectionLink']);
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {
