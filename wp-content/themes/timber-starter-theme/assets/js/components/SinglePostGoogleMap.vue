@@ -10,7 +10,7 @@
         <div id="content">
           <div id="siteNotice"></div>
           <h1 id="firstHeading" class="firstHeading">{{title}}</h1>
-					<p>{{address}}</p>
+					<a :href="getGoogleMapsDirectionsLinke()" target="_blank" rel="noopener noreferrer">Directions</a>
         </div>
       </InfoWindow>
     </Marker>
@@ -64,6 +64,9 @@
 		closeInfoWindow() {
 			this.infoWindowOpened = false;
 		},
+		getGoogleMapsDirectionsLinke(){
+			return `https://www.google.com/maps/dir/?api=1&destination= ${this.center.lat}, ${this.center.lng}`;
+		}
   	  },
     };
 </script>
