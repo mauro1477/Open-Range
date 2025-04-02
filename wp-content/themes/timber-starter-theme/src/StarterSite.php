@@ -20,8 +20,28 @@ class StarterSite extends Site {
 		// add_action('init', array($this, 'convert_posts_to_algolia_object'));
 		add_filter('acf/fields/google_map/api', array($this, 'open_range_map_key'));
 		// add_action('rest_api_init', array($this, 'register_rest_api_guides'));
+		add_filter( 'algolia_post_shared_attributes',array($this, 'my_post_attributes'), 10, 2 );
 
 		parent::__construct();
+	}
+
+	function my_post_attributes( array $attributes, WP_Post $post ) {
+
+		if ( 'guides' !== $post->post_type ) {
+			// We only want to add an attribute for the 'guides' post type.
+			// Here the post isn't a 'guides', so we return the attributes unaltered.
+			return $attributes;
+		}
+	
+		// Get the field value with the 'get_field' method and assign it to the attributes array.
+		// @see https://www.advancedcustomfields.com/resources/get_field/
+		$attributes['_geoloc']['lat'] = (float) get_post_meta( $post->ID, 'guides_location', true )['lat'];
+		$attributes['_geoloc']['lng'] = (float) get_post_meta( $post->ID, 'guides_location', true )['lng'];	
+		$attributes['address'] = get_post_meta( $post->ID, 'guides_location', true )['address'];	
+		$attributes['state'] = get_post_meta( $post->ID, 'guides_location', true )['state'];	
+		$attributes['country'] = get_post_meta( $post->ID, 'guides_location', true )['country'];	
+		// Always return the value we are filtering.
+		return $attributes;
 	}
 
 	public function open_range_map_key($api){

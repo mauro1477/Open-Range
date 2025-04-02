@@ -40,7 +40,13 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: "vue-loader"
+        loader: "vue-loader",
+        // options: {
+        //   compilerOptions: {
+        //     isCustomElement: tag => ['ais-instant-search', 'ais-search-box', 'ais-hits'].includes(tag),
+        //     isCustomElement: tag => tag === 'template',
+        //   }
+        // }
       },
       {
         test: /\.(jpeg|png|gif|svg|jpg)$/i,
