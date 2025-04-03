@@ -5,6 +5,17 @@ const Webpack  = require('webpack');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
+const env_keys = function env_keys() {
+  if (process.env.NODE_ENV === "production") {
+    return ".env.production"
+  } 
+  else if(process.env.NODE_ENV === "staging"){
+    return ".env.staging"
+  }else{
+    return ".env.development"
+  }
+}
+
 module.exports = {
   entry: {
       index: { import: '/assets/js/index.js'},
@@ -93,7 +104,7 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: false,
     }),
     new Dotenv({
-      path: path.resolve(__dirname, `.env.${process.env.NODE_ENV || 'development'}`),
+      path: path.resolve(__dirname, env_keys()),
     })
   ],
   resolve: {

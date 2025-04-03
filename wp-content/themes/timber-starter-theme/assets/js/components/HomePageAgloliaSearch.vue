@@ -1,5 +1,5 @@
 <template>
-    <ais-instant-search :search-client="searchClient" index-name="wp_posts_guides">
+    <ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix">
       <ais-search-box />
       <ais-hits>
         <template v-slot:item="{ item }">
@@ -29,6 +29,7 @@
             process.env.ALGOLIA_ID,
             process.env.ALGOLIA_API_KEY
           ),
+          env_algolia_prefix: "wp_" + process.env.ALGOLIA_PREFIX + "posts_guides"
         };
       },
       methods: {
