@@ -3,7 +3,9 @@
       <ais-search-box />
       <ais-hits>
         <template v-slot:item="{ item }">
-          <h2>{{ item.name }}</h2>
+          <a :href="item.permalink" target="" rel="noopener noreferrer">
+            <h3>{{ item.post_title }}</h3>
+          </a>
         </template>
       </ais-hits>
     </ais-instant-search>

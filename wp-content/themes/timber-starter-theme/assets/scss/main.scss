@@ -20,13 +20,101 @@ body{
     flex-direction: column;
     margin: 0 auto;
     padding: 80px 15px 80px 15px;
+
+    @media screen and (max-width: 767px) {
+        padding: 40px 15px 40px 15px;
+    }
 }
 
 .ais-InstantSearch{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+}
+
+.ais-SearchBox{
+    width: 100%;
+}
+
+.ais-SearchBox-form{
+    font-size: responsive;
+    width: 100%;
+    max-width: 800px;
+
+    input{
+        padding: 10px;
+        border-radius: 20px;
+        border: 2px solid #ccc;
+        margin: auto;
+        display: inline-block;
+        width: 80%;
+    }
+
+    input:focus { 
+        outline: none !important;
+        border-color: rgb(87, 174, 55);
+        box-shadow: 0 0 10px rgb(87, 174, 55);
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        transition: all .5s ease; 
+    }
+    textarea:focus { 
+        outline: none !important;
+        border-color: rgb(87, 174, 55);;
+        box-shadow: 0 0 10px rgb(87, 174, 55);
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        transition: all .5s ease; 
+    }
+    .ais-SearchBox-reset,
+    .ais-SearchBox-submit{
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: 2px solid #ccc;
+        background-color: #f0f0f0;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: auto;
+        display: inline-block;
+        margin-left: 10px;
+        &:hover{
+            background-color: #e0e0e0;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            transition: all .5s ease; 
+        }
+
+        .ais-SearchBox-submitIcon{
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .ais-SearchBox-reset{
+        @media screen and (max-width: 767px) {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            width: 95%;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+    }
+}
+
+.ais-Hits{
+    padding-top: 40px;
+
+
+    .ais-Hits-list{
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .ais-Hits-item{
+        padding: 15px 0;
+    }
 }
 
 .acf-map {

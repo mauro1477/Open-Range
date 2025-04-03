@@ -21,8 +21,15 @@ class StarterSite extends Site {
 		add_filter('acf/fields/google_map/api', array($this, 'open_range_map_key'));
 		// add_action('rest_api_init', array($this, 'register_rest_api_guides'));
 		add_filter( 'algolia_post_shared_attributes',array($this, 'my_post_attributes'), 10, 2 );
+		add_action( 'wp_insert_post_data', array($this, 'clean_post_title') );
 
 		parent::__construct();
+	}
+
+	function clean_post_title($post){
+		$post['post_title'] =  str_replace("&amp;","&",$post['post_title']); //Updates the post title to your new title.
+
+		return $post;
 	}
 
 	function my_post_attributes( array $attributes, WP_Post $post ) {
@@ -228,7 +235,7 @@ class StarterSite extends Site {
 	/**
 	 * This is where you add some context
 	 *
-	 * @param string $context context['this'] Being the Twig's {{ this }}.
+	 * @param string $context context[$post_id, $post 'this'] Being the Twig's {{ this }}.
 	 */
 	public function add_to_context( $context ) {
 		$context['foo']   = 'bar';

@@ -145,7 +145,7 @@ header{
         align-items: center;
         position: absolute;
         top: 0;
-        right: 24px;
+        right: 14px;
         height: 100%;
 
         i{
