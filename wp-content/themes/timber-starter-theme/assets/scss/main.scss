@@ -92,6 +92,7 @@ body{
     }
 
     .ais-SearchBox-reset{
+        display: none;
         @media screen and (max-width: 767px) {
             display: flex;
             justify-content: center;
@@ -106,6 +107,9 @@ body{
 .ais-Hits{
     padding-top: 40px;
 
+    @media screen and (max-width: 767px) {
+        padding-top: 20px;
+    }
 
     .ais-Hits-list{
         list-style: none;

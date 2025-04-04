@@ -18,12 +18,14 @@
 
 <style lang="scss" scoped>
     .footer{
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
         background-color: #000;
         color: white;
         text-align: center;
+				margin-bottom: 0px;
+				padding: 20px 0;
+
+				p{
+					margin-bottom: 0;
+				}
     }
 </style>

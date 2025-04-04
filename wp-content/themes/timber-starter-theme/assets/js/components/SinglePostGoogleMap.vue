@@ -9,7 +9,7 @@
       <InfoWindow>
         <div id="content">
           <div id="siteNotice"></div>
-          <h1 id="firstHeading" class="firstHeading">{{title}}</h1>
+          <h3 id="firstHeading" class="firstHeading">{{title}}</h3>
 					<a :href="getGoogleMapsDirectionsLinke()" target="_blank" rel="noopener noreferrer">Directions</a>
         </div>
       </InfoWindow>
