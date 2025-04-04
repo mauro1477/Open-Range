@@ -118,6 +118,11 @@ body{
 
     .ais-Hits-item{
         padding: 15px 0;
+
+        @media screen and (max-width: 767px) {
+            padding: 10px 0;
+
+        }
     }
 }
 

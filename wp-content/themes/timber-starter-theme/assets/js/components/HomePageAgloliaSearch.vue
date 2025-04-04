@@ -4,7 +4,7 @@
       <ais-hits>
         <template v-slot:item="{ item }">
           <a :href="item.permalink" target="" rel="noopener noreferrer">
-            <h3>{{ item.post_title }}</h3>
+            <h6>{{ item.post_title }}</h6>
           </a>
         </template>
       </ais-hits>
