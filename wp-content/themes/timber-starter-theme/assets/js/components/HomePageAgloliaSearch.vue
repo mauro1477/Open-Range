@@ -1,6 +1,6 @@
 <template>
     <ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix">
-      <ais-search-box />
+      <ais-search-box placeholder="Search for Guides"/>
       <ais-hits>
         <template v-slot:item="{ item }">
           <a :href="item.permalink" target="" rel="noopener noreferrer">
