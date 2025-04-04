@@ -20,7 +20,7 @@ body{
     flex-direction: column;
     margin: 0 auto;
     padding: 80px 15px 80px 15px;
-
+    min-height: 100vh;
     @media screen and (max-width: 767px) {
         padding: 40px 15px 40px 15px;
     }
