@@ -22,7 +22,7 @@ body{
     padding: 80px 15px 80px 15px;
     min-height: 100vh;
     @media screen and (max-width: 767px) {
-        padding: 40px 15px 40px 15px;
+        padding: 20px 15px 20px 15px;
     }
 }
 
@@ -92,7 +92,7 @@ body{
     }
 
     .ais-SearchBox-reset{
-        display: none;
+        display: none !important;
         @media screen and (max-width: 767px) {
             display: flex;
             justify-content: center;
