@@ -52,10 +52,7 @@
             // or handling empty queries
         },
 		scrollToTop() {
-			window.scrollTo({
-				top: -40,
-				behavior: 'smooth'
-			});
+			window.scrollTo(0, 0);
 		},
       },
     };
