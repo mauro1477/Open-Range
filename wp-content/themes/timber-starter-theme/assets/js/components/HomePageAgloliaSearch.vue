@@ -1,6 +1,28 @@
 <template>
     <ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix">
       <ais-search-box placeholder="Search for Guides"/>
+			<ais-menu-select 
+				attribute="taxonomies.guides_categories"
+				:class-names="{
+					'ais-MenuSelect-select': 'form-select',
+					'ais-MenuSelect-option': 'dropdown-item'
+				}">
+				<template v-slot:defaultOption>
+					Recreation Services
+				</template>
+				</ais-menu-select>
+				
+			<ais-menu-select 
+				attribute="state" 
+				:class-names="{
+					'ais-MenuSelect-select': 'form-select',
+					'ais-MenuSelect-option': 'dropdown-item'
+				}"
+				>
+				<template v-slot:defaultOption>
+					State
+				</template>
+			</ais-menu-select>
       <ais-hits>
         <template v-slot:item="{ item }">
           <a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">
@@ -27,7 +49,7 @@
 
     import { liteClient as algoliasearch } from 'algoliasearch/lite';
     // import 'instantsearch.css/themes/algolia-min.css';
-    import { AisInstantSearch, AisSearchBox, AisHits, AisPagination } from 'vue-instantsearch/vue3/es';
+    import {AisMenuSelect, AisInstantSearch, AisSearchBox, AisHits, AisPagination, AisRefinementList } from 'vue-instantsearch/vue3/es';
 
     export default {
       name: 'AddressSearch',
@@ -35,7 +57,9 @@
         AisInstantSearch,
         AisSearchBox,
         AisHits,
-		AisPagination
+		AisPagination,
+		AisRefinementList,
+		AisMenuSelect
       },
       data() {
         return {

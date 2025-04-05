@@ -35,7 +35,18 @@ body{
 .ais-SearchBox{
     width: 100%;
 }
+.ais-MenuSelect{
+    max-width: 639px;
+}
 
+.ais-SearchBox,
+.ais-MenuSelect{
+    padding-bottom: 10px;
+}
+
+.ais-SearchBox-submit {
+    display: none !important;
+}
 .ais-SearchBox-form{
     font-size: responsive;
     width: 100%;
@@ -47,7 +58,8 @@ body{
         border: 2px solid #ccc;
         margin: auto;
         display: inline-block;
-        width: 80%;
+        width: 100%;
+        max-width: 639px;
     }
 
     input:focus { 
