@@ -104,6 +104,9 @@ body{
     }
 }
 
+.ais-Pagination{
+    padding-top: 20px
+}
 .ais-Hits{
     padding-top: 40px;
 
@@ -212,18 +215,18 @@ float: left;
 padding: 8px 16px;
 text-decoration: none;
 }
-.pagination span.active, 
-.pagination button.active,
-.pagination a.active {
-background-color: #4CAF50;
-color: white;
-}
+// .pagination span.active, 
+// .pagination button.active,
+// .pagination a.active {
+// background-color: #4CAF50;
+// color: white;
+// }
 
-.pagination span:hover:not(.active)
-.pagination button:hover:not(.active),
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
+// .pagination span:hover:not(.active)
+// .pagination button:hover:not(.active),
+// .pagination a:hover:not(.active) {
+//     background-color: #ddd;
+// }
 .pagination span,
 .pagination button,
 .pagination a {

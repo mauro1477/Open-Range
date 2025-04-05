@@ -9,20 +9,32 @@
           </a>
         </template>
       </ais-hits>
+			<ais-pagination 
+				:show-first="false"
+				:show-last="false"
+				:class-names="{
+				'ais-Pagination-list': 'pagination',
+				'ais-Pagination-item': 'page-item',
+				'ais-Pagination-link': 'page-link',
+				'ais-Pagination-item--disable': 'disabled',
+				'ais-Pagination-item--selected': 'active',
+			}"
+			/>
     </ais-instant-search>
   </template>
 <script>
 
     import { liteClient as algoliasearch } from 'algoliasearch/lite';
     // import 'instantsearch.css/themes/algolia-min.css';
-    import { AisInstantSearch, AisSearchBox, AisHits } from 'vue-instantsearch/vue3/es';
+    import { AisInstantSearch, AisSearchBox, AisHits, AisPagination } from 'vue-instantsearch/vue3/es';
 
     export default {
       name: 'AddressSearch',
       components: {
         AisInstantSearch,
         AisSearchBox,
-        AisHits
+        AisHits,
+		AisPagination
       },
       data() {
         return {
