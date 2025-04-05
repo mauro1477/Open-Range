@@ -3,8 +3,9 @@
       <ais-search-box placeholder="Search for Guides"/>
       <ais-hits>
         <template v-slot:item="{ item }">
-          <a :href="item.permalink" target="" rel="noopener noreferrer">
+          <a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">
             <h6>{{ item.post_title }}</h6>
+						<address>Address: {{item.address}}</address>
           </a>
         </template>
       </ais-hits>
