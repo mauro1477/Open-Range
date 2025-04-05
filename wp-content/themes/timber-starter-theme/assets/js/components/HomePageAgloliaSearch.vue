@@ -10,6 +10,7 @@
         </template>
       </ais-hits>
 			<ais-pagination 
+			 	@page-change="scrollToTop"
 				:show-first="false"
 				:show-last="false"
 				:class-names="{
@@ -49,7 +50,13 @@
         handleSearch(event) {
             // You can add custom logic here if needed, like debouncing
             // or handling empty queries
-        }
+        },
+		scrollToTop() {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		},
       },
     };
 </script>
