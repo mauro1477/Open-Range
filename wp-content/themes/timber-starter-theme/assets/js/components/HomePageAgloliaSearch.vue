@@ -53,7 +53,7 @@
         },
 		scrollToTop() {
 			window.scrollTo({
-				top: 0,
+				top: -40,
 				behavior: 'smooth'
 			});
 		},
