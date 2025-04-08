@@ -2,6 +2,7 @@ name: openrange
 recipe: wordpress
 config:
   webroot: .
+  database: mysql:8.0
 services:
   appserver:
-    type: php:8.2 #add these lines
+    type: php:8.2 #add these lines        
