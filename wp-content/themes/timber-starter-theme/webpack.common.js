@@ -4,6 +4,8 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const Webpack  = require('webpack');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const TerserPlugin = require("terser-webpack-plugin");
+
 
 const env_keys = function env_keys() {
   if (process.env.NODE_ENV === "production") {
@@ -95,6 +97,7 @@ module.exports = {
 
   plugins: [
     new VueLoaderPlugin(),
+    new TerserPlugin(),
     new MiniCssExtractPlugin({ 
       filename: '[name].bundle.css'
     }),
