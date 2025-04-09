@@ -94,10 +94,23 @@ module.exports = {
       },
     ],
   },
-
+  optimization: {
+    minimize: true, // Enable minimization
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          // https://github.com/terser/terser#options
+          // Example:
+          compress: {
+            drop_console: true, // Remove console.log statements
+          },
+        },
+        extractComments: false, // Disable extracting comments to a separate file
+      }),
+    ],
+  },
   plugins: [
     new VueLoaderPlugin(),
-    new TerserPlugin(),
     new MiniCssExtractPlugin({ 
       filename: '[name].bundle.css'
     }),
