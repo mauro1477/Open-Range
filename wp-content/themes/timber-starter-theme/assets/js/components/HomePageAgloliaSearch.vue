@@ -3,8 +3,15 @@
   <div id="gist"></div>
 	<div id="map"></div>
 	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix">
+		<ais-configure
+  :hits-per-page.camel="20"
+  :analytics="false"
+  :enable-personalization.camel="true"
+  :around-lat-lng.camel="`${selected_address_result.lat},${selected_address_result.lng}`"
+  :around-radius.camel="40000"
+/>
 		<div class="ais-address-form">
-			<input class="input-address-form" :style="{ backgroundImage: 'url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)'}" type="text" :value="address"  @input="updateAddress"  placeholder="Enter Location">
+			<input class="input-address-form" :style="{ backgroundImage: 'url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)'}" type="text" :v-model="address"  placeholder="Enter Location">
 		</div>	
 		<ais-search-box placeholder="Search for Guides"/>
 		<ais-menu-select 
@@ -67,7 +74,8 @@
         AisHits,
 		AisPagination,
 		AisRefinementList,
-		AisMenuSelect
+		AisMenuSelect,
+		AisConfigure
       },
       data() {
         return {
