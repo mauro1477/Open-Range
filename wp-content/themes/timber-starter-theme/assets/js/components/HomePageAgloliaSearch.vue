@@ -7,6 +7,28 @@
 			<input class="input-address-form" :style="{ backgroundImage: 'url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)'}" type="text" :value="address"  @input="updateAddress"  placeholder="Enter Location">
 		</div>	
 		<ais-search-box placeholder="Search for Guides"/>
+		<ais-menu-select 
+				attribute="taxonomies.guides_categories"
+				:class-names="{
+					'ais-MenuSelect-select': 'form-select',
+					'ais-MenuSelect-option': 'dropdown-item'
+				}">
+				<template v-slot:defaultOption>
+					Recreation Services
+				</template>
+				</ais-menu-select>
+				
+			<ais-menu-select 
+				attribute="state" 
+				:class-names="{
+					'ais-MenuSelect-select': 'form-select',
+					'ais-MenuSelect-option': 'dropdown-item'
+				}"
+				>
+				<template v-slot:defaultOption>
+					State
+				</template>
+			</ais-menu-select>
 		<ais-hits>
 			<template v-slot:item="{ item }">
 				<a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">

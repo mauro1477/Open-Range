@@ -53,7 +53,6 @@ body{
     font-size: responsive;
     width: 100%;
     max-width: 800px;
-
     input{
         padding: 10px;
         border-radius: 20px;
@@ -116,6 +115,12 @@ body{
             margin-right: 20px;
         }
     }
+}
+.ais-address-form{
+    padding-bottom: 10px;
+}
+#map{
+    margin-bottom: 20px;
 }
 
 .input-address-form{
