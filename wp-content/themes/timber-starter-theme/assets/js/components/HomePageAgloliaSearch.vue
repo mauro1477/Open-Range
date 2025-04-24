@@ -63,9 +63,7 @@
     import { liteClient as algoliasearch } from 'algoliasearch/lite';
     import {AisConfigure, AisMenuSelect, AisInstantSearch, AisSearchBox, AisHits, AisPagination, AisRefinementList } from 'vue-instantsearch/vue3/es';
 	import postscribe from 'postscribe'
-    // Define initMap outside of the component's scope
-    
-		
+			
     export default {
       name: 'AddressSearch',
       components: {
