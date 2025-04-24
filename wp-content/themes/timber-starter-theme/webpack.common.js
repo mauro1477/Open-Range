@@ -54,12 +54,11 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: "vue-loader",
-        // options: {
-        //   compilerOptions: {
-        //     isCustomElement: tag => ['ais-instant-search', 'ais-search-box', 'ais-hits'].includes(tag),
-        //     isCustomElement: tag => tag === 'template',
-        //   }
-        // }
+        options: {
+          compilerOptions: {
+            isCustomElement: tag => tag === 'script',
+          },
+        },
       },
       {
         test: /\.(jpeg|png|gif|svg|jpg)$/i,

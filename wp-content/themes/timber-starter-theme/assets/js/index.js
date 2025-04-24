@@ -1,4 +1,6 @@
 import '../scss/main.scss';
+import { locationDotSolid } from '../images/location-dot-solid.png';
+
 import { createApp } from 'vue';
 import header from './components/NavigationMenu.vue';
 import footer from './components/Footer.vue';

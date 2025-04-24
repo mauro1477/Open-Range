@@ -47,7 +47,9 @@ body{
 .ais-SearchBox-submit {
     display: none !important;
 }
+.ais-address-form,
 .ais-SearchBox-form{
+    position: relative;
     font-size: responsive;
     width: 100%;
     max-width: 800px;
@@ -114,6 +116,12 @@ body{
             margin-right: 20px;
         }
     }
+}
+
+.input-address-form{
+    background-repeat: no-repeat !important;
+    background-position: 96%;
+    background-size: 16px 19px;
 }
 
 .ais-Pagination{
