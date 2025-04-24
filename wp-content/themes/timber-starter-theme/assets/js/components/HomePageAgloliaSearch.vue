@@ -80,8 +80,8 @@
            env_algolia_prefix: "wp_" + process.env.ALGOLIA_PREFIX + "posts_guides",
 		  location_icon: "background-image: url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)",
 		  selected_address_result: {
-			lat: -34.397,
-			lng: 150.644
+			lat: 39.7392,
+			lng: -104.9903
 		  },
         };
       },

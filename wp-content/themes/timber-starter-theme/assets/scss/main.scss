@@ -136,7 +136,7 @@ body{
     padding-top: 40px;
 
     @media screen and (max-width: 767px) {
-        padding-top: 20px;
+        padding-top: 0px;
     }
 
     .ais-Hits-list{
@@ -184,7 +184,11 @@ body{
 }
 
 #map {
-    height: 500px;
+    height: 300px;
+
+    @media screen and (min-width: 767px) {
+        height: 500px;
+    }
     width: 100%;
 }
 
