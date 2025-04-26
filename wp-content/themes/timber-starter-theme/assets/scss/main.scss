@@ -43,7 +43,9 @@ body{
 .ais-MenuSelect{
     padding-bottom: 10px;
 }
-
+.google-map{
+    margin-bottom: 20px;
+}
 .ais-SearchBox-submit {
     display: none !important;
 }
@@ -51,6 +53,7 @@ body{
     position: relative;
     width: 100%;
     max-width: 800px;
+    margin-bottom: 10px;
     select{
         margin: auto;
         display: inline-block;
@@ -144,12 +147,6 @@ body{
     padding-top: 20px
 }
 .ais-Hits{
-    padding-top: 40px;
-
-    @media screen and (max-width: 767px) {
-        padding-top: 0px;
-    }
-
     .ais-Hits-list{
         list-style: none;
         padding-left: 0;
