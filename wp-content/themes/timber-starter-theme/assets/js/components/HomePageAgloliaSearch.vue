@@ -5,7 +5,7 @@
 		<GoogleMap 
 			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
 			style="width: 100%; height: 500px; margin-bottom: 20px;" 
-			:center="center" 
+			:center="selected_address_result" 
 			:zoom="10"
     >
 		<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
@@ -111,10 +111,6 @@
       data() {
         return {
 		YOUR_GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API, // Replace with your actual API key
-		center: { 
-			lat: null, 
-			lng: null
-		},
 		title: null,
 		address: null,
 		mapZoom: 12,
@@ -149,8 +145,6 @@
 			window.scrollTo(0, 0);
 		},
 		async initMap() {
-			this.center.lat = this.selected_address_result.lat;
-			this.center.lng = this.selected_address_result.lng;
 			// const { Map } = await google.maps.importLibrary('maps');
 			const { Autocomplete } = await google.maps.importLibrary('places');
 
