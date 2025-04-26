@@ -8,10 +8,10 @@
   :analytics="false"
   :enable-personalization.camel="true"
   :around-lat-lng.camel="`${selected_address_result.lat},${selected_address_result.lng}`"
-  :around-radius.camel="40000"
+  :around-radius.camel="selectedOptionRadiusValue"
 />
 		<div class="ais-address-form">
-			<input class="input-address-form" :style="{ backgroundImage: 'url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)'}" type="text" :v-model="address"  placeholder="Enter Location">
+			<input id="input-address-form" class="input-address-form" :style="{ backgroundImage: 'url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)'}" type="text" :v-model="address"  placeholder="Enter Location">
 		</div>	
 		<ais-search-box placeholder="Search for Guides"/>
 		<ais-menu-select 
@@ -36,6 +36,15 @@
 					State
 				</template>
 			</ais-menu-select>
+			<div class="ais-radius-dropdown">
+		  <select class="form-select" v-model="selectedOptionRadiusValue">
+				<option  class="dropdown-item" value="all">No Raduis</option>
+				<option class="dropdown-item" value="80467">50 Miles</option>
+				<option class="dropdown-item" value="160934">100 Miles</option>
+				<option class="dropdown-item" value="402336">250 Miles</option>
+				<option class="dropdown-item" value="804672">500 Miles</option>
+  		</select>
+		</div>
 		<ais-hits>
 			<template v-slot:item="{ item }">
 				<a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">
@@ -89,6 +98,8 @@
 			lat: 39.7392,
 			lng: -104.9903
 		  },
+		  // 1 mile = 16000
+		  selectedOptionRadiusValue : 'all'
         };
       },
 	  mounted() {
@@ -109,7 +120,7 @@
 			});		
 			
 			this.autocomplete = new Autocomplete(
-				document.querySelector('input'),
+				document.getElementById('input-address-form'),
 				{
 				componentRestrictions: { country: 'us' },
 				fields: ['address_components', 'geometry', 'name'],

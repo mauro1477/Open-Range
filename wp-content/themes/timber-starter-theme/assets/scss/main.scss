@@ -47,6 +47,17 @@ body{
 .ais-SearchBox-submit {
     display: none !important;
 }
+.ais-radius-dropdown{
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    select{
+        margin: auto;
+        display: inline-block;
+        width: 100%;
+        max-width: 639px;
+    }
+}
 .ais-address-form,
 .ais-SearchBox-form{
     position: relative;
