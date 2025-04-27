@@ -65,6 +65,7 @@
 				<option class="dropdown-item" value="804672">500 Miles</option>
   		</select>
 		</div>
+		<div  id="ais-hits"ref="scrollTarget"></div>
 		<ais-hits>
 			<template v-slot:item="{ item }">
 				<a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">
@@ -74,7 +75,7 @@
 			</template>
 		</ais-hits>
 		<ais-pagination 
-			@page-change="scrollToTop"
+			@click="scrollToDiv"
 			:show-first="false"
 			:show-last="false"
 			:class-names="{
@@ -184,9 +185,15 @@
 			// const map = new google.maps.Map(document.getElementById("map"), {
 			// 	center: this.selected_address_result,
 			// 	zoom: 12,
-			// });		
+			// });	
+			this.scrollToTop();	
 			this.address = place.formatted_address;
 		},
+		scrollToDiv() {
+          this.$nextTick(() => {
+            this.$refs.scrollTarget.scrollIntoView({ behavior: 'smooth' });
+          });
+        },
 		openInfoWindow() {
 			this.infoWindowOpened = true;
 		},
