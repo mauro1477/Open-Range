@@ -136,6 +136,7 @@ class StarterSite extends Site {
 		wp_register_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/index.bundle.js' );
 
 		// Localize the script with new data
+		// Main Menu
 		$array_menu = wp_get_nav_menu_items('primary-menu');
 		$menu = array();
 		foreach ($array_menu as $m) {
@@ -156,10 +157,33 @@ class StarterSite extends Site {
 				$menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
 			}
 		} 
+		// Footer Menu
+		$array_menu_footer = wp_get_nav_menu_items('footer-menu');
+		$menuFooter = array();
+		foreach ($array_menu_footer as $m) {
+			if (empty($m->menu_item_parent)) {
+				$menuFooter[$m->ID]['ID'] 		= 	$m->ID;
+				$menuFooter[$m->ID]['title'] 		= 	$m->title;
+				$menuFooter[$m->ID]['url'] 		= 	$m->url;
+				$menuFooter[$m->ID]['children']	= 	array();
+			}
+		}
+		$submenuFooter = array();
+		foreach ($array_menu_footer as $m) {
+			if ($m->menu_item_parent) {
+				$submenu = array();
+				$submenuFooter[$m->ID]['ID'] 		= 	$m->ID;
+				$submenuFooter[$m->ID]['title']	= 	$m->title;
+				$submenuFooter[$m->ID]['url'] 	= 	$m->url;
+				$menuFooter[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+			}
+		} 
+
 		$host_name =  $_SERVER["HTTP_X_FORWARDED_PROTO"] ."://" .$_SERVER["HTTP_HOST"];
 		$theme_vars = array(
 			'menu' => $menu,
-			'host_name' => $host_name
+			'menu_footer' => $menuFooter,
+			'host_name' => $host_name,
 
 		);
 		wp_localize_script( 'base-scripts', 'theme_vars', $theme_vars);

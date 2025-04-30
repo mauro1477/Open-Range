@@ -8,7 +8,7 @@
             </a>
             <ul v-show="!mobile" class="navigation">
                 <li v-for="(item, index) in local_data_primary_menu">
-                    <a class="link" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
+                    <a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
                 </li>
             </ul>
             <div class="icon">
@@ -16,8 +16,8 @@
             </div>
             <Transition id="mobile-nav" name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
-                    <li class="link-wrapper" v-for="(item, index) in local_data_primary_menu">
-                        <a class="link" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
+                    <li class="link-rapper" v-for="(item, index) in local_data_primary_menu">
+                        <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
                     </li>
                 </ul>
             </Transition>
@@ -29,8 +29,9 @@
 <script>
 
 export default {
-
+	name: 'Main Nav',
     data() {
+		
         return {
             local_data_primary_menu: theme_vars['menu'],
             mobile: true,
