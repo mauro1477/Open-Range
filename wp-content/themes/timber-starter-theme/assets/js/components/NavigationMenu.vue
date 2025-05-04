@@ -3,8 +3,8 @@
     <header>
         <nav>
             <a href="/" target="" class="branding">
-                <i class="fa-solid fa-tree" style="color: #57ae37;"></i>
-                <div class="website-title-logo">Opened Range</div>
+							<img class="website-title-image" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green.png" alt="Opened Range Logo">
+							<div class="website-title-logo">Opened Range</div>
             </a>
             <ul v-show="!mobile" class="navigation">
                 <li v-for="(item, index) in local_data_primary_menu">
