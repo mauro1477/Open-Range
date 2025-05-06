@@ -61,7 +61,8 @@
         color: white;
         text-align: center;
 				margin-bottom: 0px;
-				padding: 20px 0;
+				padding: 20px 15px;
+				font-size: 14px;
 
 				p{
 					margin-bottom: 0;
@@ -70,7 +71,13 @@
 				ul{
 					list-style: none;
 					display: flex;
-    			justify-content: center;
+					justify-content: center;
+					flex-wrap: wrap;
+					margin-top: 10px;
+					padding: 0px;
+					li{
+						padding: 5px 5px;
+					}
 					a{
 						padding: 0 5px;
 					}
