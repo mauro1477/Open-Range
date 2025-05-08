@@ -146,7 +146,8 @@ body{
 }
 
 .ais-Pagination{
-    padding-top: 20px
+    padding-top: 20px;
+    overflow: auto;
 }
 .ais-Hits{
     .ais-Hits-list{
