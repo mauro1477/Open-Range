@@ -93,7 +93,6 @@
     import { liteClient as algoliasearch } from 'algoliasearch/lite';
     import {AisConfigure, AisMenuSelect, AisInstantSearch, AisSearchBox, AisHits, AisPagination, AisRefinementList } from 'vue-instantsearch/vue3/es';
 	import { GoogleMap, Marker, InfoWindow } from "vue3-google-map";
-	import postscribe from 'postscribe'
 			
     export default {
       name: 'AddressSearch',
@@ -133,12 +132,10 @@
 			lat: 39.7392,
 			lng: -104.9903
 		  },
-		  // 1 mile = 16000
 		  selectedOptionRadiusValue : 'all'
         };
       },
 	  mounted() {
-		// postscribe('#gist', `<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgYeoslPIi0_0ttWCFbtQGdNTmT24ktfA&loading=async&libraries=places"><\/script>`)
         this.initMap();
 	},
       methods: {
@@ -146,14 +143,7 @@
 			window.scrollTo(0, 0);
 		},
 		async initMap() {
-			// const { Map } = await google.maps.importLibrary('maps');
 			const { Autocomplete } = await google.maps.importLibrary('places');
-
-			// const map = new google.maps.Map(document.getElementById("map"), {
-			// 	center: this.selected_address_result,
-			// 	zoom: 12,
-			// });		
-			
 			this.autocomplete = new Autocomplete(
 				document.getElementById('input-address-form'),
 				{
@@ -162,12 +152,6 @@
 				}
 			);
 			this.autocomplete.addListener('place_changed', this.onPlaceChanged);
-		},
-		getCurrentHits() {
-		this.$children[0].$children[0].getResults().then(content => {
-			this.currentHits = content.hits;
-			console.log('Current Hits:', this.currentHits);
-		})
 		},
 		onPlaceChanged() {
 			const place = this.autocomplete.getPlace();
@@ -181,11 +165,7 @@
 				lat: place.geometry.location.lat(),
 				lng: place.geometry.location.lng()
 			};
-
-			// const map = new google.maps.Map(document.getElementById("map"), {
-			// 	center: this.selected_address_result,
-			// 	zoom: 12,
-			// });	
+			
 			this.scrollToTop();	
 			this.address = place.formatted_address;
 		},
