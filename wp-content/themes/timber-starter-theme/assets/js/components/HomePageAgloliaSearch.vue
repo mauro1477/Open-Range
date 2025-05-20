@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="gist"></div>
-	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix">
+	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true">
 		<GoogleMap 
 			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
 			style="width: 100%; height: 500px; margin-bottom: 20px;" 
@@ -95,8 +95,8 @@
 	import { GoogleMap, Marker, InfoWindow } from "vue3-google-map";
 			
     export default {
-      name: 'AddressSearch',
-      components: {
+	    name: 'AddressSearch',
+        components: {
         AisInstantSearch,
         AisSearchBox,
         AisHits,
