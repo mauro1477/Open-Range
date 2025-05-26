@@ -51,10 +51,10 @@
         const javascriptObject = JSON.parse(myArray);
         this.center.lat = javascriptObject['lat'];
         this.center.lng = javascriptObject['lng'];
-		this.address = javascriptObject['address'];
-		this.title = javascriptObject['title'].replace("&#8211;", "-")
-		console.log(javascriptObject);
-		this.infoWindowPosition.lat = javascriptObject['lat'];
+        this.address = javascriptObject['address'];
+        this.title = javascriptObject['title'].replace("&#8211;", "-")
+        console.log(javascriptObject);
+        this.infoWindowPosition.lat = javascriptObject['lat'];
         this.infoWindowPosition.lng = javascriptObject['lng'];
       },
 	  methods: {

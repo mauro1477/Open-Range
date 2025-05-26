@@ -2,9 +2,9 @@
 <div if="true">
     <header>
         <nav>
-            <a href="/" target="" class="branding">
-							<img class="website-title-image" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green.png" alt="Opened Range Logo">
-							<div class="website-title-logo">Opened Range</div>
+            <a href="/" target="" class="flex items-center text-white !no-underline">
+							<img class="w-14 h-14 mr-4" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green.png" alt="Opened Range Logo">
+							<div class="fit-size h-auto font-bold">Opened Range</div>
             </a>
             <ul v-show="!mobile" class="navigation">
                 <li v-for="(item, index) in local_data_primary_menu">
@@ -17,7 +17,7 @@
             <Transition id="mobile-nav" name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
                     <li class="link-rapper" v-for="(item, index) in local_data_primary_menu">
-                        <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
+                        <a class="fit-size h-auto font-bold no-underline hover:underline" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
                     </li>
                 </ul>
             </Transition>
@@ -86,7 +86,7 @@ header{
         width: 90%;
         margin: 0 auto;
         @media screen and (min-width: 1140px) {
-            max-width: 1140px;
+            max-width: 1280px;
         }
     }
 
@@ -125,18 +125,6 @@ header{
         }
     }
 
-    .branding{
-        text-decoration: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        i,
-        img{
-            font-size: 20px;
-            margin-right: 15px;
-            transition: 0.5s ease all;
-        }
-    }
     .fa-bars{
         color: white;
     }

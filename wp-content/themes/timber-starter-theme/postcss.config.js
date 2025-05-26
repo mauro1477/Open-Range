@@ -1,6 +1,7 @@
 if(process.env.NODE_ENV == "production"){
     module.exports = {
         plugins:{
+            "@tailwindcss/postcss": {},
             autoprefixer: {},
             cssnano: {},
             'rucksack-css': {}
@@ -9,6 +10,7 @@ if(process.env.NODE_ENV == "production"){
 }else if (process.env.NODE_ENV == "staging"){
     module.exports = {
         plugins:{
+            "@tailwindcss/postcss": {},
             autoprefixer: {},
             cssnano: {},
             'rucksack-css': {}
@@ -18,7 +20,8 @@ if(process.env.NODE_ENV == "production"){
     module.exports = {
         plugins:{
             autoprefixer: {},
-            'rucksack-css': {}
+            'rucksack-css': {},
+            "@tailwindcss/postcss": {},
         }
     };
 }

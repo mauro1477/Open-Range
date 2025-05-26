@@ -17,19 +17,13 @@
 				</div>
 			{% endblock %}
 		</header>
-
-		<section id="content" role="main" class="content-wrapper">
+		<section id="content" role="main" class="flex justify-center max-w-7xl max-sm:pr-4 max-sm:pl-4 m-auto">
 			{% if title %}<h1 class="title">{{title}}</h1>{% endif %}
-			<div class="wrapper">
+			<div class="w-1/1 max-w-1/1">
 				{% block content %}
 					Sorry, no content
 				{% endblock %}
 			</div>
-			{% if sidebar %}
-				<aside class="layout-sidebar">
-					{{sidebar}}
-				</aside>
-			{% endif %}
 		</section>
 
 		{% block footer %}
@@ -38,6 +32,5 @@
 			{{ function('wp_footer') }}
 		{% endblock %}
 		<script src="https://unpkg.com/default-passive-events"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	</body>
 </html>

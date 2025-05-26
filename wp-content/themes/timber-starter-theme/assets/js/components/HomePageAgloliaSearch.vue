@@ -1,50 +1,81 @@
 <template>
-<div>
+<div class="mt-4">
   <div id="gist"></div>
-	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true">
+	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true" :class-names="{ 'ais-InstantSearch' : 'flex flex-wrap max-w-7xl  flex-row-reverse justify-evenly'}">
 		<GoogleMap 
 			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
-			style="width: 100%; height: 500px; margin-bottom: 20px;" 
 			:center="selected_address_result" 
 			:zoom="10"
-    >
-		<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
-        <template v-slot="{ items }">
+			class="size-125 mb-8"
+			>
+			<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
+				<template v-slot="{ items }">
 					<Marker v-for="post in items" :key="post.id" :options="{ position:  post._geoloc }">
 						<InfoWindow>
-						<div id="content">
-							<div id="siteNotice"></div>
-							<h3 id="firstHeading" class="firstHeading">{{post.post_title}}</h3>
-							<a :href="getGoogleMapsDirectionsLinke(post.address)" target="_blank" rel="noopener noreferrer">Directions</a>
-						</div>
-					</InfoWindow>
-    	</Marker>
-        </template>
-      </ais-hits>
-
-	</GoogleMap>
-	
-		<ais-configure
+							<div id="content">
+								<div id="siteNotice"></div>
+								<h3 id="firstHeading" class="firstHeading">{{post.post_title}}</h3>
+								<a :href="getGoogleMapsDirectionsLinke(post.address)" target="_blank" rel="noopener noreferrer">Directions</a>
+							</div>
+						</InfoWindow>
+					</Marker>
+				</template>
+			</ais-hits>
+		</GoogleMap>
+		<div class="lg:w-1/2 lg:mr-4">
+			<ais-configure
 				:hits-per-page.camel="20"
 				:analytics="false"
 				:enable-personalization.camel="true"
 				:around-lat-lng.camel="`${selected_address_result.lat},${selected_address_result.lng}`"
 				:around-radius.camel="selectedOptionRadiusValue"
 			/>
-		<div class="ais-address-form">
-			<input id="input-address-form" class="input-address-form" :style="{ backgroundImage: 'url(/wp-content/themes/timber-starter-theme/assets/images/location-dot-solid.png)'}" type="text" :v-model="address"  placeholder="Enter Location">
-		</div>	
-		<ais-search-box placeholder="Search for Guides"/>
-		<ais-menu-select 
-				attribute="taxonomies.guides_categories"
-				:class-names="{
-					'ais-MenuSelect-select': 'form-select',
-					'ais-MenuSelect-option': 'dropdown-item'
-				}">
-				<template v-slot:defaultOption>
-					Recreation Services
+			<div class="ais-address-form max-w-md mx-auto mb-4">
+				<div class="relative block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
+					<input id="input-address-form" class="outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" :v-model="address"  placeholder="Enter Location">
+					<i class="fa-solid fa-location-dot absolute top-1/3 left-4"></i>
+				</div>
+			</div>	
+
+			<ais-search-box>
+				<template v-slot="{ currentRefinement, isSearchStalled, refine }">
+					<div class="max-w-md mx-auto mb-4">
+						<div class="relative relative block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
+							<input
+							type="search"
+							:value="currentRefinement"
+							@input="refine($event.currentTarget.value)"
+							placeholder="Search for Guides"
+							class="outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							>
+							<i class="fas fa-search absolute top-1/3 left-4"></i>
+					</div>
+					</div>
 				</template>
-				</ais-menu-select>
+			</ais-search-box>
+
+			<ais-menu-select attribute="taxonomies.guides_categories">
+				<template v-slot="{ items, canRefine, refine, sendEvent }">
+					<div class="bg-gray-50">
+						<select
+					:disabled="!canRefine"
+					@change="refine($event.currentTarget.value)"
+					class="relative relative block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+					>
+					<option value="">All</option>
+					<option
+						v-for="item in items"
+						:key="item.value"
+						:value="item.value"
+						:selected="item.isRefined"
+					>
+						{{ item.label }}
+					</option>
+					</select>
+					</div>
+				</template>
+			</ais-menu-select>
+
 			<ais-menu-select 
 				attribute="state" 
 				:class-names="{
@@ -55,37 +86,42 @@
 				<template v-slot:defaultOption>
 					State
 				</template>
-				</ais-menu-select>
+			</ais-menu-select>
 			<div class="ais-radius-dropdown">
-		  <select class="form-select" v-model="selectedOptionRadiusValue">
-				<option  class="dropdown-item" value="all">No Raduis</option>
-				<option class="dropdown-item" value="80467">50 Miles</option>
-				<option class="dropdown-item" value="160934">100 Miles</option>
-				<option class="dropdown-item" value="402336">250 Miles</option>
-				<option class="dropdown-item" value="804672">500 Miles</option>
-  		</select>
+				<select class="form-select" v-model="selectedOptionRadiusValue">
+					<option  class="dropdown-item" value="all">No Raduis</option>
+					<option class="dropdown-item" value="80467">50 Miles</option>
+					<option class="dropdown-item" value="160934">100 Miles</option>
+					<option class="dropdown-item" value="402336">250 Miles</option>
+					<option class="dropdown-item" value="804672">500 Miles</option>
+				</select>
+			</div>
+			<div  id="ais-hits"ref="scrollTarget"></div>
+			<ais-hits :class-names="{ 
+				'ais-Hits-list' : 'px-0',
+				'ais-Hits-item'	: ''
+				}">
+				<template v-slot:item="{ item }">
+					<a :href="item.permalink" target="" rel="noopener noreferrer" class="text-black decoration-inherit underline underline-offset-8'">
+						<h6>{{ item.post_title }}</h6>
+						<address>Address: {{item.address}}</address>
+					</a>
+				</template>
+			</ais-hits>
+			<ais-pagination 
+				@click="scrollToDiv"
+				:show-first="false"
+				:show-last="false"
+				:class-names="{
+					'ais-Pagination' : '',
+					'ais-Pagination-list': 'inline-flex -space-x-px text-sm',
+					'ais-Pagination-item': 'page-item',
+					'ais-Pagination-link': 'flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white',
+					'ais-Pagination-item--disable': 'disabled',
+					'ais-Pagination-item--selected': 'active',
+			}"
+			/>
 		</div>
-		<div  id="ais-hits"ref="scrollTarget"></div>
-		<ais-hits>
-			<template v-slot:item="{ item }">
-				<a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">
-					<h6>{{ item.post_title }}</h6>
-					<address>Address: {{item.address}}</address>
-				</a>
-			</template>
-		</ais-hits>
-		<ais-pagination 
-			@click="scrollToDiv"
-			:show-first="false"
-			:show-last="false"
-			:class-names="{
-			'ais-Pagination-list': 'pagination',
-			'ais-Pagination-item': 'page-item',
-			'ais-Pagination-link': 'page-link',
-			'ais-Pagination-item--disable': 'disabled',
-			'ais-Pagination-item--selected': 'active',
-		}"
-		/>
 	</ais-instant-search>
 </div>
 </template>
