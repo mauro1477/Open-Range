@@ -83,7 +83,7 @@ header{
         z-index: 99;
         padding: 12px 0;
         transition: 0.5s ease all;
-        width: 90%;
+        width: 92%;
         margin: 0 auto;
         @media screen and (min-width: 1140px) {
             max-width: 1280px;
@@ -135,7 +135,7 @@ header{
         align-items: center;
         position: absolute;
         top: 0;
-        right: 14px;
+        right: 0px;
         height: 100%;
 
         i{
