@@ -3,7 +3,7 @@
     <header>
         <nav>
             <a href="/" target="" class="flex items-center text-white !no-underline">
-							<img class="w-14 h-14 mr-4" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green.png" alt="Opened Range Logo">
+							<img class="w-14 h-14 mr-4" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green-DMarNqVJ.webp" alt="Opened Range Logo">
 							<div class="fit-size h-auto font-bold">Opened Range</div>
             </a>
             <ul v-show="!mobile" class="navigation">
