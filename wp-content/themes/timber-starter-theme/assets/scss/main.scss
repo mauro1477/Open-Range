@@ -1,2 +1,42 @@
 @import "tailwindcss";
 @import "./google-map.scss";
+
+.pagination-block{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    /* to remove bullets from an unordered list */
+    ul {
+        list-style: none;
+    }
+
+    /* to remove bullets from an ordered list */
+    ol {
+        list-style:none; 
+    }
+
+    li{
+        list-style:none; 
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+.current{
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+.pagination span, 
+.pagination button,
+.pagination a {
+color: black;
+float: left;
+padding: 8px 16px;
+text-decoration: none;
+}

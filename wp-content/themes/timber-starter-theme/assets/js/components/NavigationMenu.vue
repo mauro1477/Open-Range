@@ -17,7 +17,7 @@
             <Transition id="mobile-nav" name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
                     <li class="link-rapper" v-for="(item, index) in local_data_primary_menu">
-                        <a class="fit-size h-auto font-bold no-underline hover:underline" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
+                        <a class="fit-size h-auto font-bold no-underline hover:underline text-black" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
                     </li>
                 </ul>
             </Transition>
@@ -118,6 +118,7 @@ header{
         padding-bottom: 4px;
         border-bottom: 4px;
         border-bottom: 1px solid transparent;
+        color: black;
 
         &:hover{
             color: #00afea;

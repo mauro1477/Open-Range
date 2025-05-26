@@ -70,8 +70,10 @@
   },
   "dependencies": {
     "@fawmi/vue-google-maps": "^0.9.79",
+    "@popperjs/core": "^2.11.8",
     "@tailwindcss/postcss": "^4.1.7",
     "@vueuse/core": "^13.1.0",
+    "bootstrap": "^5.3.6",
     "dotenv": "^16.4.7",
     "path": "^0.12.7",
     "stream": "^0.0.3",

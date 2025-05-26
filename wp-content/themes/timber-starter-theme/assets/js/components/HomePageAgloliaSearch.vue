@@ -30,97 +30,89 @@
 				:around-lat-lng.camel="`${selected_address_result.lat},${selected_address_result.lng}`"
 				:around-radius.camel="selectedOptionRadiusValue"
 			/>
-			<div class="ais-address-form max-w-md mx-auto mb-4">
-				<div class="relative block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
-					<input id="input-address-form" class="outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" :v-model="address"  placeholder="Enter Location">
-					<i class="fa-solid fa-location-dot absolute top-1/3 left-4"></i>
+			<div class="ais-address-form max-w-md mb-2">
+				<div class="relative block pl-2 py-2 w-full pl-7 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
+					<input id="input-address-form" class="outline-none w-full focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" :v-model="address"  placeholder="Enter Location">
+					<i class="fa-solid fa-location-dot absolute top-28/100 left-2"></i>
 				</div>
 			</div>	
 
 			<ais-search-box>
 				<template v-slot="{ currentRefinement, isSearchStalled, refine }">
-					<div class="max-w-md mx-auto mb-4">
-						<div class="relative relative block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
+					<div class="max-w-md mb-2">
+						<div class="relative relative block pl-7 py-2 w-full ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
 							<input
 							type="search"
 							:value="currentRefinement"
 							@input="refine($event.currentTarget.value)"
 							placeholder="Search for Guides"
-							class="outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							class="outline-none w-full focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							>
-							<i class="fas fa-search absolute top-1/3 left-4"></i>
+							<i class="fas fa-search absolute top-28/100 left-2"></i>
 					</div>
 					</div>
 				</template>
 			</ais-search-box>
 
-			<ais-menu-select attribute="taxonomies.guides_categories">
-				<template v-slot="{ items, canRefine, refine, sendEvent }">
-					<div class="bg-gray-50">
-						<select
-					:disabled="!canRefine"
-					@change="refine($event.currentTarget.value)"
-					class="relative relative block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-					>
-					<option value="">All</option>
-					<option
-						v-for="item in items"
-						:key="item.value"
-						:value="item.value"
-						:selected="item.isRefined"
-					>
-						{{ item.label }}
-					</option>
-					</select>
-					</div>
+			<ais-menu-select 
+				attribute="taxonomies.guides_categories"
+				:class-names="{
+					'ais-MenuSelect' : 'max-w-md mb-2',
+					'ais-MenuSelect-select': 'form-select text-sm',
+					'ais-MenuSelect-option': 'dropdown-item'
+				}">
+				<template v-slot:defaultOption>
+					Recreation Services
 				</template>
-			</ais-menu-select>
-
+				</ais-menu-select>
 			<ais-menu-select 
 				attribute="state" 
 				:class-names="{
-					'ais-MenuSelect-select': 'form-select',
+					'ais-MenuSelect' : 'max-w-md mb-2',
+					'ais-MenuSelect-select': 'form-select text-sm',
 					'ais-MenuSelect-option': 'dropdown-item'
 				}"
 				>
 				<template v-slot:defaultOption>
 					State
 				</template>
-			</ais-menu-select>
-			<div class="ais-radius-dropdown">
-				<select class="form-select" v-model="selectedOptionRadiusValue">
-					<option  class="dropdown-item" value="all">No Raduis</option>
-					<option class="dropdown-item" value="80467">50 Miles</option>
-					<option class="dropdown-item" value="160934">100 Miles</option>
-					<option class="dropdown-item" value="402336">250 Miles</option>
-					<option class="dropdown-item" value="804672">500 Miles</option>
+				</ais-menu-select>
+			<div class="max-w-md mb-2">
+				<select class="form-select text-sm" v-model="selectedOptionRadiusValue">
+						<option  class="dropdown-item" value="all">No Raduis</option>
+						<option class="dropdown-item" value="80467">50 Miles</option>
+						<option class="dropdown-item" value="160934">100 Miles</option>
+						<option class="dropdown-item" value="402336">250 Miles</option>
+						<option class="dropdown-item" value="804672">500 Miles</option>
 				</select>
 			</div>
-			<div  id="ais-hits"ref="scrollTarget"></div>
-			<ais-hits :class-names="{ 
-				'ais-Hits-list' : 'px-0',
-				'ais-Hits-item'	: ''
-				}">
-				<template v-slot:item="{ item }">
-					<a :href="item.permalink" target="" rel="noopener noreferrer" class="text-black decoration-inherit underline underline-offset-8'">
-						<h6>{{ item.post_title }}</h6>
-						<address>Address: {{item.address}}</address>
-					</a>
-				</template>
-			</ais-hits>
-			<ais-pagination 
-				@click="scrollToDiv"
-				:show-first="false"
-				:show-last="false"
-				:class-names="{
-					'ais-Pagination' : '',
-					'ais-Pagination-list': 'inline-flex -space-x-px text-sm',
-					'ais-Pagination-item': 'page-item',
-					'ais-Pagination-link': 'flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white',
-					'ais-Pagination-item--disable': 'disabled',
-					'ais-Pagination-item--selected': 'active',
-			}"
-			/>
+		<div  id="ais-hits"ref="scrollTarget"></div>
+		<ais-hits
+		:class-names="{
+			'ais-Hits-list': 'pt-4 !pl-0',
+			'ais-Hits-item': 'pb-2',
+		}"
+		>
+			<template v-slot:item="{ item }">
+				<a :href="item.permalink" target="" rel="noopener noreferrer" class="link-dark">
+					<h6>{{ item.post_title }}</h6>
+					<address>Address: {{item.address}}</address>
+				</a>
+			</template>
+		</ais-hits>
+		<ais-pagination 
+			@click="scrollToDiv"
+			:show-first="false"
+		    :show-last="false"
+			:total-pages="5"
+			:class-names="{
+			'ais-Pagination-list': 'pagination',
+			'ais-Pagination-item': 'page-item',
+			'ais-Pagination-link': 'page-link',
+			'ais-Pagination-item--disable': 'disabled',
+			'ais-Pagination-item--selected': 'active',
+		}"
+		/>
 		</div>
 	</ais-instant-search>
 </div>
