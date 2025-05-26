@@ -6,6 +6,7 @@
 			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
 			:center="selected_address_result" 
 			:zoom="10"
+			:streetViewControl="show_view_street"
 			class="size-125 mb-8"
 			>
 			<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
@@ -163,6 +164,7 @@
 			lat: 39.7392,
 			lng: -104.9903
 		  },
+		  show_view_street: false,
 		  selectedOptionRadiusValue : 'all'
         };
       },
