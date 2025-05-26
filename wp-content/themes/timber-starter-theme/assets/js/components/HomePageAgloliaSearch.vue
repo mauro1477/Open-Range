@@ -32,7 +32,7 @@
 			/>
 			<div class="ais-address-form max-w-md mb-2">
 				<div class="relative block pl-2 py-2 w-full pl-7 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50">
-					<input id="input-address-form" class="outline-none w-full focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" :v-model="address"  placeholder="Enter Location">
+					<input id="input-address-form" class="outline-none w-full focus:ring-blue-500 focus:border-blue-500 " type="text" :v-model="address"  placeholder="Enter Location">
 					<i class="fa-solid fa-location-dot absolute top-28/100 left-2"></i>
 				</div>
 			</div>	
@@ -46,7 +46,7 @@
 							:value="currentRefinement"
 							@input="refine($event.currentTarget.value)"
 							placeholder="Search for Guides"
-							class="outline-none w-full focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							class="outline-none w-full focus:ring-blue-500 focus:border-blue-500"
 							>
 							<i class="fas fa-search absolute top-28/100 left-2"></i>
 					</div>
