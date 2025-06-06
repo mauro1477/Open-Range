@@ -1,13 +1,14 @@
 <template>
-<div class="mt-4">
+<div class="flex justify-center max-w-7xl  max-xl:pr-4 max-xl:pl-4 pt-4 pb-4 m-auto">
   <div id="gist"></div>
-	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true" :class-names="{ 'ais-InstantSearch' : 'flex flex-wrap max-w-7xl  flex-row-reverse justify-evenly'}">
+	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true" :class-names="{ 'ais-InstantSearch' : 'lg:flex max-w-7xl  flex-row-reverse justify-evenly w-1/1'}">
 		<GoogleMap 
 			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
 			:center="selected_address_result" 
 			:zoom="10"
 			:streetViewControl="show_view_street"
-			class="size-125 mb-8"
+			class="max-h-[400px] max-w-400px mb-4"
+			style="height: 400px; width: 100%;"
 			>
 			<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
 				<template v-slot="{ items }">

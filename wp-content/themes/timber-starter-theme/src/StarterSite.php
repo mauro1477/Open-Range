@@ -16,10 +16,7 @@ class StarterSite extends Site {
 		add_filter('post_type_link', [$this , 'filter_post_type_guide_link'], 10, 2);
 		add_action( 'save_post', [$this, 'default_taxonomy_term'], 100, 2 );
 		add_action('after_setup_theme', [$this, 'register_menu']);
-		add_action( 'after_setup_theme', array( $this, 'enqueue_styles_and_scripts' ) );
-		// add_action('init', array($this, 'convert_posts_to_algolia_object'));
 		add_filter('acf/fields/google_map/api', array($this, 'open_range_map_key'));
-		// add_action('rest_api_init', array($this, 'register_rest_api_guides'));
 		add_filter( 'algolia_post_shared_attributes',array($this, 'my_post_attributes'), 10, 2 );
 		add_action( 'wp_insert_post_data', array($this, 'clean_post_title') );
 
@@ -56,39 +53,6 @@ class StarterSite extends Site {
 		return $api;
 	}
 
-	public function register_rest_api_guides(){
-		register_rest_route( 'timber-starter-theme/v2', '/get-algolia-object-guides', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_algolia_object_guides'),
-		  ) );
-	}
-
-	public function get_guides_from_id(){
-		return ['hello world'];
-	} 
-
-	function convert_posts_to_algolia_object(){
-		$id = $request['id']; 
-		// Custom WP query query
-		$args_query = array(
-			'post_type' => array('guides'),
-			'order' => 'DESC',
-		);
-	
-		$query = new WP_Query( $args_query );
-	
-		if ( $query->have_posts() ) { 
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				var_dump($query->the_post());
-				$data = [];
-			}
-		} else {
-			echo "no guides posts";
-		}
-		return $data;
-	}
-
 	/**
 	 * Add REST API support to an already registered post type.
 	 */
@@ -106,93 +70,6 @@ class StarterSite extends Site {
 		return $args;
 	}
 	
-	function get_events_from_id($request){
-		$id = $request['id']; 
-		// Custom WP query query
-		$args_query = array(
-			'post_type' => array('guides'),
-			'order' => 'DESC',
-		);
-	
-		$query = new WP_Query( $args_query );
-	
-		if ( $query->have_posts() ) { 
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				$data = [];
-			}
-		} else {
-			echo "no guides posts";
-		}
-		return $data;
-		wp_reset_postdata();
-	}
-
-	function enqueue_styles_and_scripts(){
-
-
-		$theme_root = get_theme_root_uri();
-		// Register the script
-		wp_register_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/index.bundle.js' );
-
-		// Localize the script with new data
-		// Main Menu
-		$array_menu = wp_get_nav_menu_items('primary-menu');
-		$menu = array();
-		foreach ($array_menu as $m) {
-			if (empty($m->menu_item_parent)) {
-				$menu[$m->ID]['ID'] 		= 	$m->ID;
-				$menu[$m->ID]['title'] 		= 	$m->title;
-				$menu[$m->ID]['url'] 		= 	$m->url;
-				$menu[$m->ID]['children']	= 	array();
-			}
-		}
-		$submenu = array();
-		foreach ($array_menu as $m) {
-			if ($m->menu_item_parent) {
-				$submenu = array();
-				$submenu[$m->ID]['ID'] 		= 	$m->ID;
-				$submenu[$m->ID]['title']	= 	$m->title;
-				$submenu[$m->ID]['url'] 	= 	$m->url;
-				$menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
-			}
-		} 
-		// Footer Menu
-		$array_menu_footer = wp_get_nav_menu_items('footer-menu');
-		$menuFooter = array();
-		foreach ($array_menu_footer as $m) {
-			if (empty($m->menu_item_parent)) {
-				$menuFooter[$m->ID]['ID'] 		= 	$m->ID;
-				$menuFooter[$m->ID]['title'] 		= 	$m->title;
-				$menuFooter[$m->ID]['url'] 		= 	$m->url;
-				$menuFooter[$m->ID]['children']	= 	array();
-			}
-		}
-		$submenuFooter = array();
-		foreach ($array_menu_footer as $m) {
-			if ($m->menu_item_parent) {
-				$submenu = array();
-				$submenuFooter[$m->ID]['ID'] 		= 	$m->ID;
-				$submenuFooter[$m->ID]['title']	= 	$m->title;
-				$submenuFooter[$m->ID]['url'] 	= 	$m->url;
-				$menuFooter[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
-			}
-		} 
-
-		$host_name =  $_SERVER["HTTP_X_FORWARDED_PROTO"] ."://" .$_SERVER["HTTP_HOST"];
-		$theme_vars = array(
-			'menu' => $menu,
-			'menu_footer' => $menuFooter,
-			'host_name' => $host_name,
-
-		);
-		wp_localize_script( 'base-scripts', 'theme_vars', $theme_vars);
-		wp_enqueue_script( 'base-scripts', $theme_root .'/timber-starter-theme/dist/index.bundle.js', array('jquery','wp-api'),'', true );
-		wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/index.bundle.css',);
- 	}		
-
-
-
 	/**
 	 * This is where you can register custom post types.
 	 */
@@ -262,10 +139,61 @@ class StarterSite extends Site {
 	 * @param string $context context[$post_id, $post 'this'] Being the Twig's {{ this }}.
 	 */
 	public function add_to_context( $context ) {
-		$context['foo']   = 'bar';
-		$context['stuff'] = 'I am a value set in your functions.php file';
-		$context['notes'] = 'These values are available everytime you call Timber::context();';
-		$context['menu'] = Timber::get_menu('primary');
+		// Localize the script with new data
+		// Main Menu
+		$array_menu = wp_get_nav_menu_items('primary-menu');
+		$menu = array();
+		foreach ($array_menu as $m) {
+			if (empty($m->menu_item_parent)) {
+				$menu[$m->ID]['ID'] 		= 	$m->ID;
+				$menu[$m->ID]['title'] 		= 	$m->title;
+				$menu[$m->ID]['url'] 		= 	$m->url;
+				$menu[$m->ID]['children']	= 	array();
+			}
+		}
+		$submenu = array();
+		foreach ($array_menu as $m) {
+			if ($m->menu_item_parent) {
+				$submenu = array();
+				$submenu[$m->ID]['ID'] 		= 	$m->ID;
+				$submenu[$m->ID]['title']	= 	$m->title;
+				$submenu[$m->ID]['url'] 	= 	$m->url;
+				$menu[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+			}
+		} 
+		// Footer Menu
+		$array_menu_footer = wp_get_nav_menu_items('footer-menu');
+		$menuFooter = array();
+		foreach ($array_menu_footer as $m) {
+			if (empty($m->menu_item_parent)) {
+				$menuFooter[$m->ID]['ID'] 		= 	$m->ID;
+				$menuFooter[$m->ID]['title'] 		= 	$m->title;
+				$menuFooter[$m->ID]['url'] 		= 	$m->url;
+				$menuFooter[$m->ID]['children']	= 	array();
+			}
+		}
+		$submenuFooter = array();
+		foreach ($array_menu_footer as $m) {
+			if ($m->menu_item_parent) {
+				$submenu = array();
+				$submenuFooter[$m->ID]['ID'] 		= 	$m->ID;
+				$submenuFooter[$m->ID]['title']	= 	$m->title;
+				$submenuFooter[$m->ID]['url'] 	= 	$m->url;
+				$menuFooter[$m->menu_item_parent]['children'][$m->ID] = $submenu[$m->ID];
+			}
+		} 
+
+		$host_name =  $_SERVER["HTTP_X_FORWARDED_PROTO"] ."://" .$_SERVER["HTTP_HOST"];
+
+		$theme_vars = array(
+			'menu' => $menu,
+			'menu_footer' => $menuFooter,
+			'host_name' => $host_name,
+			'current_post_id' => get_the_ID()
+		);
+
+		$context['theme_vars'] = $theme_vars;
+
 		$context['site']  = $this;
 
 		return $context;

@@ -12,13 +12,23 @@
 $context         = Timber::context();
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
+
 $context['guides_location'] = get_field('guides_location',$context['post']->ID);
 $context['guides_location']['title'] = $context['post']->title;
 $context['googleDirectionLink'] = "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($context['guides_location']['address']);
-// var_dump($context['guides_location']);
+
+// Register the script
+$theme_root = get_theme_root_uri();
+
+wp_register_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppPage.bundle.js' );
+wp_localize_script( 'base-page-scripts', 'theme_vars', $context['theme_vars']);
+
+wp_enqueue_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppPage.bundle.js', array('jquery','wp-api'),'', true );
+wp_enqueue_style( 'base-page-styles', $theme_root .'/timber-starter-theme/dist/indexAppPage.bundle.css' );
+
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {
-	Timber::render( array( 'single-' . $timber_post->ID . '.twig', 'single-' . $timber_post->post_type . '.twig', 'single-' . $timber_post->slug . '.twig', 'single.twig' ), $context );
+	Timber::render( array( 'base-apppage.twig' ), $context );
 }
 

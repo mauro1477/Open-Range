@@ -20,7 +20,9 @@ const env_keys = function env_keys() {
 
 module.exports = {
   entry: {
-      index: { import: '/assets/js/index.js'},
+      //index = indexAppHomePage
+      indexAppHomePage: { import: '/assets/js/indexAppHomePage.js'},
+      indexAppPage: { import: '/assets/js/indexAppPage.js'},
     },
   output: {
     path: path.resolve(__dirname, "dist"),
