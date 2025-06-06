@@ -1,6 +1,8 @@
-@import "tailwindcss";
-@import "~bootstrap/scss/bootstrap";
-@import "./google-map.scss";
+@use "tailwindcss";
+@use "bootstrap/dist/css/bootstrap.min.css";
+
+
+@use "./google-map.scss";
 
 .pagination-block{
     display: flex;
