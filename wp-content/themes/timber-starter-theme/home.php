@@ -22,7 +22,7 @@ wp_localize_script( 'base-home-page-scripts', 'theme_vars', $context['theme_vars
 
 wp_enqueue_script( 'base-home-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppHomePage.bundle.js', array('jquery','wp-api'),'', true );
 wp_enqueue_style( 'base-home-page-styles', $theme_root .'/timber-starter-theme/dist/indexAppHomePage.bundle.css' );
-
+wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/indexAppStyles.bundle.css' );
 
 $templates = array( 'base-apppage.twig' );
 if ( is_home() ) {

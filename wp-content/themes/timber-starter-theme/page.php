@@ -33,5 +33,7 @@ wp_localize_script( 'base-page-scripts', 'theme_vars', $context['theme_vars']);
 
 wp_enqueue_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppSinglePage.bundle.js', array('jquery','wp-api'),'', true );
 wp_enqueue_style( 'base-page-styles', $theme_root .'/timber-starter-theme/dist/indexAppSinglePage.bundle.css' );
+wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/indexAppStyles.bundle.css' );
+
 
 Timber::render( array( 'base-appsinglepage.twig' ), $context );

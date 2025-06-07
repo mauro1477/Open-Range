@@ -25,6 +25,7 @@ wp_localize_script( 'base-guide-scripts', 'theme_vars', $context['theme_vars']);
 
 wp_enqueue_script( 'base-guide-scripts', $theme_root .'/timber-starter-theme/dist/indexAppSingleGuide.bundle.js', array('jquery','wp-api'),'', true );
 wp_enqueue_style( 'base-guide-styles', $theme_root .'/timber-starter-theme/dist/indexAppSingleGuide.bundle.css' );
+wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/indexAppStyles.bundle.css' );
 
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );

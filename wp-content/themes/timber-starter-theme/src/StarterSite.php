@@ -21,7 +21,7 @@ class StarterSite extends Site {
 		add_action( 'wp_insert_post_data', array($this, 'clean_post_title') );
 		parent::__construct();
 	}
-
+	
 	function clean_post_title($post){
 		$post['post_title'] =  str_replace("&amp;","&",$post['post_title']); //Updates the post title to your new title.
 

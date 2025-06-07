@@ -20,19 +20,30 @@ const env_keys = function env_keys() {
 
 module.exports = {
   entry: {
-      //index = indexAppHomePage
-      indexAppHomePage: { import: '/assets/js/indexAppHomePage.js'},
-      indexAppSingleGuide: { import: '/assets/js/indexAppSingleGuide.js'},
-      indexAppSinglePage: { import: '/assets/js/indexAppSinglePage.js'},
-    },
+      indexAppHomePage: {
+        import: '/assets/js/indexAppHomePage.js',
+      },
+      indexAppSingleGuide: {
+        import: '/assets/js/indexAppSingleGuide.js',
+      },
+      indexAppSinglePage: {
+        import: '/assets/js/indexAppSinglePage.js',
+      },
+      indexAppStyles: {
+        import: '/assets/js/indexStyles.js',
+      },
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: '[name].bundle.js',
   },
+  optimization: {
+    runtimeChunk: 'single',
+  },
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test:  /\.(sass|css|scss)$/,
         use: [
             {
               loader: MiniCssExtractPlugin.loader,

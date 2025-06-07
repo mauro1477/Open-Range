@@ -1,5 +1,3 @@
-import '../scss/main.scss';
-
 import { createApp } from 'vue';
 import AppHomePage from './AppHomePage.vue';
 
