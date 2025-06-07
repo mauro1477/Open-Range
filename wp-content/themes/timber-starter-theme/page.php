@@ -25,5 +25,13 @@ $context = Timber::context();
 
 $timber_post     = Timber::get_post();
 $context['post'] = $timber_post;
-var_dump("hello page");
-Timber::render( array( 'page-' . $timber_post->post_name . '.twig', 'page.twig' ), $context );
+// Register the script
+$theme_root = get_theme_root_uri();
+
+wp_register_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppSinglePage.bundle.js' );
+wp_localize_script( 'base-page-scripts', 'theme_vars', $context['theme_vars']);
+
+wp_enqueue_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppSinglePage.bundle.js', array('jquery','wp-api'),'', true );
+wp_enqueue_style( 'base-page-styles', $theme_root .'/timber-starter-theme/dist/indexAppSinglePage.bundle.css' );
+
+Timber::render( array( 'base-appsinglepage.twig' ), $context );

@@ -2,28 +2,30 @@
 <div class="flex justify-center max-w-7xl  max-xl:pr-4 max-xl:pl-4 pt-4 pb-4 m-auto">
   <div id="gist"></div>
 	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true" :class-names="{ 'ais-InstantSearch' : 'lg:flex max-w-7xl  flex-row-reverse justify-evenly w-1/1'}">
-		<GoogleMap 
-			:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
-			:center="selected_address_result" 
-			:zoom="10"
-			:streetViewControl="show_view_street"
-			class="max-h-[400px] max-w-400px mb-4"
-			style="height: 400px; width: 100%;"
-			>
-			<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
-				<template v-slot="{ items }">
-					<Marker v-for="post in items" :key="post.id" :options="{ position:  post._geoloc }">
-						<InfoWindow>
-							<div id="content">
-								<div id="siteNotice"></div>
-								<h3 id="firstHeading" class="firstHeading">{{post.post_title}}</h3>
-								<a :href="getGoogleMapsDirectionsLinke(post.address)" target="_blank" rel="noopener noreferrer">Directions</a>
-							</div>
-						</InfoWindow>
-					</Marker>
-				</template>
-			</ais-hits>
-		</GoogleMap>
+		<div class="lg:w-1/2">
+			<GoogleMap 
+				:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
+				:center="selected_address_result" 
+				:zoom="10"
+				:streetViewControl="show_view_street"
+				class="max-h-[400px] max-w-400px mb-4"
+				style="height: 400px; width: 100%;"
+				>
+				<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
+					<template v-slot="{ items }">
+						<Marker v-for="post in items" :key="post.id" :options="{ position:  post._geoloc }">
+							<InfoWindow>
+								<div id="content">
+									<div id="siteNotice"></div>
+									<h3 id="firstHeading" class="firstHeading">{{post.post_title}}</h3>
+									<a :href="getGoogleMapsDirectionsLinke(post.address)" target="_blank" rel="noopener noreferrer">Directions</a>
+								</div>
+							</InfoWindow>
+						</Marker>
+					</template>
+				</ais-hits>
+			</GoogleMap>
+		</div>
 		<div class="lg:w-1/2 lg:mr-4">
 			<ais-configure
 				:hits-per-page.camel="20"

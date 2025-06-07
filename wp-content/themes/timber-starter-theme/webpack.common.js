@@ -22,7 +22,8 @@ module.exports = {
   entry: {
       //index = indexAppHomePage
       indexAppHomePage: { import: '/assets/js/indexAppHomePage.js'},
-      indexAppPage: { import: '/assets/js/indexAppPage.js'},
+      indexAppSingleGuide: { import: '/assets/js/indexAppSingleGuide.js'},
+      indexAppSinglePage: { import: '/assets/js/indexAppSinglePage.js'},
     },
   output: {
     path: path.resolve(__dirname, "dist"),

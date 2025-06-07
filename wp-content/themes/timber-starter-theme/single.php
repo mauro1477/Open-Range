@@ -20,15 +20,15 @@ $context['googleDirectionLink'] = "https://www.google.com/maps/dir/?api=1&destin
 // Register the script
 $theme_root = get_theme_root_uri();
 
-wp_register_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppPage.bundle.js' );
-wp_localize_script( 'base-page-scripts', 'theme_vars', $context['theme_vars']);
+wp_register_script( 'base-guide-scripts', $theme_root .'/timber-starter-theme/dist/indexAppSingleGuide.bundle.js' );
+wp_localize_script( 'base-guide-scripts', 'theme_vars', $context['theme_vars']);
 
-wp_enqueue_script( 'base-page-scripts', $theme_root .'/timber-starter-theme/dist/indexAppPage.bundle.js', array('jquery','wp-api'),'', true );
-wp_enqueue_style( 'base-page-styles', $theme_root .'/timber-starter-theme/dist/indexAppPage.bundle.css' );
+wp_enqueue_script( 'base-guide-scripts', $theme_root .'/timber-starter-theme/dist/indexAppSingleGuide.bundle.js', array('jquery','wp-api'),'', true );
+wp_enqueue_style( 'base-guide-styles', $theme_root .'/timber-starter-theme/dist/indexAppSingleGuide.bundle.css' );
 
 if ( post_password_required( $timber_post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {
-	Timber::render( array( 'base-apppage.twig' ), $context );
+	Timber::render( array( 'base-appsingleguide.twig' ), $context );
 }
 
