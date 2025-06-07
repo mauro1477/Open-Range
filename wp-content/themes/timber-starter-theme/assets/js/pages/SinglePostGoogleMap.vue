@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading" class=" max-w-7xl max-xl:pr-4 max-xl:pl-4 ml-auto mr-auto pt-4 pb-4">
+  <div v-if="!loading" class="max-w-7xl max-xl:pr-4 max-xl:pl-4 ml-auto mr-auto pt-4 pb-4">
       <article class="w-1/1">
         <section class="article-content">
             <h1 class="article-h1" v-text="get_title(post.title.rendered)"></h1>

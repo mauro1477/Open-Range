@@ -19,7 +19,6 @@ class StarterSite extends Site {
 		add_filter('acf/fields/google_map/api', array($this, 'open_range_map_key'));
 		add_filter( 'algolia_post_shared_attributes',array($this, 'my_post_attributes'), 10, 2 );
 		add_action( 'wp_insert_post_data', array($this, 'clean_post_title') );
-
 		parent::__construct();
 	}
 
