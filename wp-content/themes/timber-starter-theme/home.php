@@ -24,6 +24,12 @@ wp_enqueue_script( 'base-home-page-scripts', $theme_root .'/timber-starter-theme
 wp_enqueue_style( 'base-home-page-styles', $theme_root .'/timber-starter-theme/dist/indexAppHomePage.bundle.css' );
 wp_enqueue_style( 'base-styles', $theme_root .'/timber-starter-theme/dist/indexAppStyles.bundle.css' );
 
+
+wp_deregister_style('wp-block-library');
+// You can also remove other Gutenberg-related styles if needed:
+wp_deregister_style('wp-block-library-theme');
+wp_deregister_style('wc-block-style'); // If using WooCommerce
+
 $templates = array( 'base-apppage.twig' );
 if ( is_home() ) {
 	array_unshift( $templates, 'base-apphomepage.twig' );
