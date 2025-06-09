@@ -63,29 +63,58 @@
 
 			<ais-menu-select 
 				attribute="taxonomies.guides_categories"
-				:aria-label="'Filter by guides categroy'" 
-				:class-names="{
-					'ais-MenuSelect' : 'max-w-md mb-2',
-					'ais-MenuSelect-select': 'form-select text-sm',
-					'ais-MenuSelect-option': 'dropdown-item'
-				}">
-				<template v-slot:defaultOption>
-					Recreation Services
-				</template>
-				</ais-menu-select>
-			<ais-menu-select 
-				attribute="state" 
-				:aria-label="'Filter by state'" 
-				:class-names="{
-					'ais-MenuSelect' : 'max-w-md mb-2',
-					'ais-MenuSelect-select': 'form-select text-sm',
-					'ais-MenuSelect-option': 'dropdown-item'
-				}"
+				:aria-label="'Filter by guides categroy'"
+				class="max-w-md mb-2" 
 				>
-				<template v-slot:defaultOption>
-					State
+				<template v-slot="{ items, canRefine, refine, sendEvent }">
+					<select
+						class="ais-MenuSelect-select form-select text-sm"
+						aria-label="Recreation Services"
+						:disabled="!canRefine"
+						@change="refine($event.currentTarget.value)"
+						>
+						<option value="">Recreation Services</option>
+						<option
+							v-for="item in items"
+							:key="item.value"
+							:value="item.value"
+							:selected="item.isRefined"
+							:aria-label="`Option ${item.value}`"
+							class="ais-MenuSelect-option dropdown-item"
+						>
+							{{ item.label }}
+						</option>
+					</select>
 				</template>
-				</ais-menu-select>
+			</ais-menu-select>
+
+			<ais-menu-select 
+				attribute="state"
+				:aria-label="'Filter by state'" 
+				class="max-w-md mb-2" 
+				>
+				<template v-slot="{ items, canRefine, refine, sendEvent }">
+					<select
+						class="ais-MenuSelect-select form-select text-sm"
+						aria-label="Recreation Services"
+						:disabled="!canRefine"
+						@change="refine($event.currentTarget.value)"
+						>
+						<option value="">State</option>
+						<option
+							v-for="item in items"
+							:key="item.value"
+							:value="item.value"
+							:selected="item.isRefined"
+							:aria-label="`Option ${item.value}`"
+							class="ais-MenuSelect-option dropdown-item"
+						>
+							{{ item.label }}
+						</option>
+					</select>
+				</template>
+			</ais-menu-select>
+
 			<div class="max-w-md mb-2">
 				<select aria-label="Filter by radius in miles" class="form-select text-sm" v-model="selectedOptionRadiusValue">
 						<option aria-label="Option no radius"   class="dropdown-item" value="all">No Raduis</option>
