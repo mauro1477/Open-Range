@@ -3,16 +3,17 @@
     <header>
         <nav>
             <a href="/" target="" class="flex items-center text-white !no-underline">
-							<img class="w-13 h-12 mr-4" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green.webp" alt="Opened Range Logo">
-							<div class="fit-size h-auto font-bold">Opened Range</div>
+                <img class="w-13 h-13 mr-4" src="/wp-content/themes/timber-starter-theme/assets/images/official-logo-v1-green.webp" alt="Opened Range Logo">
+                <div class="fit-size h-auto font-bold">Opened Range</div>
             </a>
             <ul v-show="!mobile" class="navigation">
                 <li v-for="(item, index) in local_data_primary_menu">
                     <a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" :href=item.url target="" rel="noopener noreferrer">{{ item.title }}</a>
                 </li>
             </ul>
-            <div class="icon">
-                <i id="toggle-icon" @click="toggleMobileNav"  v-show="mobile" :class="{'icon-active' : mobileNav }"  class="fa-solid fa-bars"></i>
+            <div v-show="mobile"  class="icons"  @click="toggleMobileNav" id="toggle-icon">
+                <i class="fa-solid fa-bars" :class="{'icon-hide' : mobileNavIsOpen }"></i>
+                <i class="fa-solid fa-xmark" :class="{'icon-active' : mobileNavIsOpen }"></i>
             </div>
             <Transition id="mobile-nav" name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
@@ -36,6 +37,7 @@ export default {
             local_data_primary_menu: theme_vars['menu'],
             mobile: true,
             mobileNav: null,
+            mobileNavIsOpen: false,
             windowWidth: null
         }
     },
@@ -43,14 +45,15 @@ export default {
         window.addEventListener('resize', this.checkScreen);
         this.checkScreen();
     },
-    mounted() {
-        document.addEventListener('click', this.handleClickOutsideDropdownMenu);
-    },
-    beforeUnmount() {
-        document.removeEventListener('click', this.handleClickOutsideDropdownMenu);
-    },
+    // mounted() {
+    //     document.addEventListener('click', this.handleClickOutsideDropdownMenu);
+    // },
+    // beforeUnmount() {
+    //     document.removeEventListener('click', this.handleClickOutsideDropdownMenu);
+    // },
     methods: {
         toggleMobileNav(){
+            this.mobileNavIsOpen = !this.mobileNavIsOpen;
             this.mobileNav = !this.mobileNav;
         },
         checkScreen(){
@@ -64,11 +67,11 @@ export default {
             this.mobileNav = false;
             return;
         },
-        handleClickOutsideDropdownMenu(event){
-            if (event.target.id !== "mobile-nav" && event.target.id !== "toggle-icon" && event.target.className !== "link" && event.target.className !== "link-wrapper"  ) {
-                this.mobileNav = false;
-            } 
-        }
+        // handleClickOutsideDropdownMenu(event){
+        //     if (event.target.id !== "mobile-nav" && event.target.id !== "toggle-icon" && event.target.className !== "link" && event.target.className !== "link-wrapper"  ) {
+        //         this.mobileNav = false;
+        //     } 
+        // }
     },
 }
 </script>
@@ -125,12 +128,17 @@ header{
             border-color: #00afea;
         }
     }
-
+    .icon-hide,
+    .fa-xmark{
+        display: none;
+    }
+    
+    .fa-xmark,
     .fa-bars{
         color: white;
     }
 
-    .icon{
+    .icons{
         display: flex;
         align-items: center;
         position: absolute;
@@ -167,7 +175,7 @@ header{
     }
 
     .icon-active{
-        transform: rotate(180deg);
+        display: block;
     }
 
     .website-title-logo{
