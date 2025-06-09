@@ -1,6 +1,6 @@
 const { VueLoaderPlugin } = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const Webpack  = require('webpack');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
@@ -38,7 +38,27 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   optimization: {
-    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -80,31 +100,31 @@ module.exports = {
 
       },
       // We recommend using only for the "production" mode
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        enforce: "pre",
-        generator: {
-          filename: 'images/[name][ext]'
-        },
-        use: [
-          {
-            loader: ImageMinimizerPlugin.loader,
-            options: {
-              minimizer: {
-                implementation: ImageMinimizerPlugin.imageminMinify,
-                options: {
-                  plugins: [
-                    "imagemin-gifsicle",
-                    "imagemin-mozjpeg",
-                    "imagemin-pngquant",
-                    "imagemin-svgo",
-                  ],
-                },
-              },
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/i,
+      //   enforce: "pre",
+      //   generator: {
+      //     filename: 'images/[name][ext]'
+      //   },
+      //   use: [
+      //     {
+      //       loader: ImageMinimizerPlugin.loader,
+      //       options: {
+      //         minimizer: {
+      //           implementation: ImageMinimizerPlugin.imageminMinify,
+      //           options: {
+      //             plugins: [
+      //               "imagemin-gifsicle",
+      //               "imagemin-mozjpeg",
+      //               "imagemin-pngquant",
+      //               "imagemin-svgo",
+      //             ],
+      //           },
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
   optimization: {

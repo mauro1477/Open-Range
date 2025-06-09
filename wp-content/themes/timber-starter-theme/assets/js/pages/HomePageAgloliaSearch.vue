@@ -1,7 +1,7 @@
 <template>
 <div class="flex justify-center max-w-7xl  max-xl:pr-4 max-xl:pl-4 pt-4 pb-4 m-auto">
   <div id="gist"></div>
-	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :insights="true" :class-names="{ 'ais-InstantSearch' : 'lg:flex max-w-7xl  flex-row-reverse justify-evenly w-1/1'}">
+	<ais-instant-search :search-client="searchClient" :index-name="env_algolia_prefix" :class-names="{ 'ais-InstantSearch' : 'lg:flex max-w-7xl  flex-row-reverse justify-evenly w-1/1'}">
 		<div class="lg:w-1/2">
 			<GoogleMap 
 				:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
