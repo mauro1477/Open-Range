@@ -7,13 +7,15 @@
 				:api-key="YOUR_GOOGLE_MAPS_API_KEY" 
 				:center="selected_address_result" 
 				:zoom="10"
+				:mapTypeControl="false"
+				:disableDefaultUI="true"
 				:streetViewControl="show_view_street"
 				class="max-h-[400px] max-w-400px mb-4"
 				style="height: 400px; width: 100%;"
 				>
 				<ais-hits :class-names="{ 'ais-Hits': 'hits' }" >
 					<template v-slot="{ items }">
-						<Marker v-for="post in items" :key="post.id" :options="{ position:  post._geoloc }">
+						<Marker v-for="post in items" :key="post.id" :options="{ position:  post._geoloc , title: post.post_title }">
 							<InfoWindow>
 								<div id="content">
 									<div id="siteNotice"></div>
