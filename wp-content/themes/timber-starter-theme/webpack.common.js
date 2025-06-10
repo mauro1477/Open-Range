@@ -56,6 +56,11 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
+            "exclude": [
+              // \\ for Windows, / for macOS and Linux
+              /node_modules[\\/]plugin-transform-classes/,
+              /node_modules[\\/]plugin-transform-spread/,
+            ],
             presets: [
               ['@babel/preset-env', { targets: "defaults" }]
             ]
