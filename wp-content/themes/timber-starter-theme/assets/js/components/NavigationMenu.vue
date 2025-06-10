@@ -130,7 +130,8 @@ header{
     }
     .icon-hide,
     .fa-xmark{
-        display: none;
+        visibility: hidden;
+        opacity: 0;
     }
     
     .fa-xmark,
@@ -142,14 +143,16 @@ header{
         display: flex;
         align-items: center;
         position: absolute;
-        top: 0;
-        right: 0px;
-        height: 100%;
+        top: 40%;
+        right: 25px;
+        height: fit-content;
 
         i{
             cursor: pointer;
             font-size: 24px;
-            transition: 0.8s ease all;
+            position: absolute;
+            top: 0;
+            left: 0px;
         }
     }
 
@@ -175,7 +178,8 @@ header{
     }
 
     .icon-active{
-        display: block;
+        opacity: 1;
+        visibility: visible;
     }
 
     .website-title-logo{

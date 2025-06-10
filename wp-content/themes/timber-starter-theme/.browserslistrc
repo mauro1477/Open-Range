@@ -1,3 +1,6 @@
-last 2 years
-> 1%
+# Target the last 2 versions of popular browsers worldwide
+last 2 versions
+# Include browsers with more than 0.2% global market share
+> 0.2%
+# Exclude "dead" browsers (no security updates for 24+ months)
 not dead
